@@ -1,6 +1,7 @@
 package controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -47,45 +48,53 @@ public class GoodController {
 		return "all";
 	}
 
-	@RequestMapping(value = "/${id}", method = RequestMethod.GET)
-	public String getGood(@PathVariable long id, Model model) {
+	@RequestMapping(value = "/good/{id}", method = RequestMethod.GET)
+	public String getGood(Model model, @PathVariable long id) {
 		Good good = goodService.getByID(id);
 		model.addAttribute("good", good);
 		return "good";
 	}
 
-	@RequestMapping(value = "/${cathName}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{cathName}", method = RequestMethod.GET)
 	public String AllGoodsOfCathegory(@PathVariable String cathName, Model model) {
 		Cathegory cathegory = cathegoryService.getCathegoryByName(cathName);
 		List<GoodDTO> goodsCath = goodService.getGoodByCathegory(cathegory);
-		model.addAttribute("goodsCath", goodsCath);
+		model.addAttribute("goods", goodsCath);
 		return "allCathGoods";
 	}
 
-	@RequestMapping(value = "/${id}/toBasket", method = RequestMethod.POST)
+	@RequestMapping(value = "/{id}/toBasket", method = RequestMethod.GET)
 	public String addGoodToBasket(@PathVariable long id, Principal principal) {
+		User user = userService.getUserByLogin(principal.getName());
 		Good good = goodService.getByID(id);
-
-		Basket b = basketService.getBasketByUser(userService.getByID(Long
-				.parseLong(principal.getName())));
+		
+		
+		
+		Basket b = basketService.getBasketByUser(userService
+				.getUserByLogin(principal.getName()));
+		
 		if (b == null) {
-			User user = userService
-					.getByID(Long.parseLong(principal.getName()));
-			Basket basket = new Basket(user);
+			List<Good> goods = new ArrayList<Good>();
+			goods.add(good);
+			Basket basket = new Basket(user, goods);
 			basketService.add(basket);
-			basket.getGoods().add(good);
+			System.out.println(basket.getId());
 		} else {
-			b.getGoods().add(good);
+			List<Good> goods = b.getGoods();
+			goods.add(good);
+			b.setGoods(goods);
+			basketService.update(b);
 		}
 		return "redirect:/basket";
 	}
-	
+
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String searchGoodByCathegoryAndKeyword(@RequestParam String keyword, HttpServletRequest request, Model model){
+	public String searchGoodByCathegoryAndKeyword(@RequestParam String keyword,
+			HttpServletRequest request, Model model) {
 		String cathName = request.getParameter("cathName");
 		Cathegory cathegory = cathegoryService.getCathegoryByName(cathName);
-		List<Good> searchGoods = goodService.getGoodBySearch(keyword, cathegory);
-		model.addAttribute("searchGoods", searchGoods);
+		List<Good> goods = goodService.getGoodBySearch(keyword, cathegory);
+		model.addAttribute("goods", goods);
 		return "searchedGoods";
 	}
 

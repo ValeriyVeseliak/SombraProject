@@ -5,6 +5,15 @@
 
 <tiles-definitions>
 
+	<!-- <definition name="base.definition" template="/WEB-INF/views/tiles/layout.jsp">
+		<put-list-attribute name="cathegories">
+			<add-attribute value="/WEB-INF/views/tiles/header.jsp"></add-attribute>
+			<add-attribute value="/WEB-INF/views/tiles/sidebar.jsp"></add-attribute>
+		</put-list-attribute>
+	</definition> -->
+
+
+
 	<definition name="base.definition" template="/WEB-INF/views/tiles/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
 		<put-attribute name="sidebar" value="/WEB-INF/views/tiles/sidebar.jsp" />
@@ -15,7 +24,7 @@
 		<put-attribute name="title" value="Login" />
 		<put-attribute name="main_content" value="/WEB-INF/views/Main/login.jsp" />
 	</definition>
-	
+
 	<definition name="signup" extends="base.definition">
 		<put-attribute name="title" value="Sign Up" />
 		<put-attribute name="main_content" value="/WEB-INF/views/Main/signup.jsp" />
@@ -25,57 +34,76 @@
 		<put-attribute name="title" value="Admin Cabinet" />
 		<put-attribute name="main_content" value="/WEB-INF/views/Admin/admin.jsp" />
 	</definition>
-	
+
 	<definition name="cathegories" extends="base.definition">
+
+
 		<put-attribute name="title" value="Cathegories" />
-		<put-attribute name="main_content" value="/WEB-INF/views/Admin/cathegories.jsp" />
+		<put-attribute name="main_content"
+			value="/WEB-INF/views/Admin/cathegories.jsp" />
+			
+			
+		<put-list-attribute name="cathegories">
+			<add-attribute value="/WEB-INF/views/tiles/header.jsp"></add-attribute>
+			<add-attribute value="/WEB-INF/views/tiles/sidebar.jsp"></add-attribute>
+		</put-list-attribute>
 	</definition>
-	
+
 	<definition name="goodTable" extends="base.definition">
 		<put-attribute name="title" value="Goods" />
 		<put-attribute name="main_content" value="/WEB-INF/views/Admin/goodTable.jsp" />
 	</definition>
-	
+
 	<definition name="orders" extends="base.definition">
 		<put-attribute name="title" value="Orders" />
 		<put-attribute name="main_content" value="/WEB-INF/views/Admin/orders.jsp" />
 	</definition>
-	
+
 	<definition name="users" extends="base.definition">
 		<put-attribute name="title" value="Users" />
 		<put-attribute name="main_content" value="/WEB-INF/views/Admin/users.jsp" />
 	</definition>
-	
+
 	<definition name="all" extends="base.definition">
 		<put-attribute name="title" value="Main Page" />
 		<put-attribute name="main_content" value="/WEB-INF/views/Good/all.jsp" />
 	</definition>
-	
+
 	<definition name="allCathGoods" extends="base.definition">
 		<put-attribute name="title" value="Goods of Cathegory" />
-		<put-attribute name="main_content" value="/WEB-INF/views/Good/allCathGoods.jsp" />
+		<put-attribute name="main_content"
+			value="/WEB-INF/views/Good/allCathGoods.jsp" />
 	</definition>
-	
+
 	<definition name="good" extends="base.definition">
 		<put-attribute name="title" value="Good" />
 		<put-attribute name="main_content" value="/WEB-INF/views/Good/good.jsp" />
 	</definition>
-	
+
 	<definition name="successAdding" extends="base.definition">
 		<put-attribute name="title" value="Success Adding" />
-		<put-attribute name="main_content" value="/WEB-INF/views/Good/successAdding.jsp" />
+		<put-attribute name="main_content"
+			value="/WEB-INF/views/Good/successAdding.jsp" />
 	</definition>
-	
+
 	<definition name="success" extends="base.definition">
 		<put-attribute name="title" value="Success" />
 		<put-attribute name="main_content" value="/WEB-INF/views/Good/success.jsp" />
 	</definition>
-	
+
 	<definition name="searchedGoods" extends="base.definition">
 		<put-attribute name="title" value="SearchedGoods" />
-		<put-attribute name="main_content" value="/WEB-INF/views/Good/searchedGoods.jsp" />
+		<put-attribute name="main_content"
+			value="/WEB-INF/views/Good/searchedGoods.jsp" />
 	</definition>
 	
-	
+	<definition name="basket" extends="base.definition">
+		<put-attribute name="title" value="Basket" />
+		<put-attribute name="main_content"
+			value="/WEB-INF/views/Good/basket.jsp" />
+	</definition>
+
+
+
 </tiles-definitions>
 

@@ -1,31 +1,45 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
-<table>
+
+
 <c:forEach items="${goods}" var="good">
-<tr>
-	<td>${good.goodName}</td>
-	<td></td>
-	<td></td>
-</tr>
+	<div class="row">
+		<div class=".col-sm-6">
+			<div class="thumbnail">
+				<a href="/SombraStore/good/${good.id}"><img src="resources/img/${good.id}.jpg" class="previewimage"></a>
+				<div class="caption">
+					<a href="/SombraStore/good/${good.id}"><b>${good.goodName}</b></a>
+					<p>Price: ${good.price}</p>
+					<p>Details: ${good.description}</p>
+					<sec:authorize access="isAuthenticated()">
+						<a href="/SombraStore/${good.id}/toBasket" class="btn btn-primary"
+							role="button">Add to Basket</a>
+					</sec:authorize>
+				</div>
+			</div>
+		</div>
+	</div>
 </c:forEach>
-</table>
-<select>
-	
-</select>
+
 
 <select>
-	<option value="5">5</option>
+	<option value="5">9</option>
 	<option value="10">10</option>
 	<option value="25">25</option>
 </select>
 
 <label for=price>Price</label>
-<input type=range min=0 max="${maxPrice}" value="${maxPrice}"  id=price oninput="outputUpdate(value)" step=10>
+<input type=range min=0 max="${maxPrice}" value="${maxPrice}" id=price
+	oninput="outputUpdate(value)" step=10>
 <output for=price id=newPrice>${maxPrice}</output>
-<script>
-function outputUpdate(vol) {
-document.querySelector('#newPrice').value = vol;
-}
-</script>
 
+
+<script>
+	function outputUpdate(vol) {
+		document.querySelector('#newPrice').value = vol;
+	}
+</script>
+<script type="text/javascript"
+	src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>

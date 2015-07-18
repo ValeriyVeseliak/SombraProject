@@ -41,41 +41,49 @@ public class BasketController {
 
 	@RequestMapping()
 	public String getAllGoodInBasket(Model model, Principal principal) {
-		User user = userService.getByID(Long.parseLong(principal.getName()));
+		
+		User user = userService.getUserByLogin(principal.getName());
+		
 		Basket basket = basketService.getBasketByUser(user);
+		System.out.println(basket.getId());
 		Double sumPrice = (double) 0;
 		List<Good> goods = basket.getGoods();
 		for (Good good : goods) {
+			System.out.println(good);
 			sumPrice += good.getPrice();
 		}
+		int countOfGoods = goods.size();
+		model.addAttribute("countOfGoods", countOfGoods);
 		model.addAttribute("sumPrice", sumPrice);
 		model.addAttribute("goods", goods);
 		return "basket";
 	}
 
-	@RequestMapping(value = "/${id}/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
 	public String deleteGoodFromBasket(@PathVariable long id, Principal principal) {
-		User user = userService.getByID(Long.parseLong(principal.getName()));
+		Good good = goodService.getByID(id);
+		User user = userService.getUserByLogin(principal.getName());
 		Basket basket = basketService.getBasketByUser(user);
 		List<Good> goods = basket.getGoods();
-		Good good = goodService.getByID(id);
-		Iterator<Good> iter = goods.iterator();
-		while (iter.hasNext()) {
-			Good g = iter.next();
-			if (g.equals(good)) {
-				iter.remove();
+		
+		Iterator<Good> g = goods.iterator();
+		while(g.hasNext()){
+			if(g.next().equals(good)){
+				g.remove();
 			}
 		}
+		basket.setGoods(goods);
+		basketService.update(basket);
 		return "redirect:/basket";
 	}
 
-	@RequestMapping(value = "makeOrder", method = RequestMethod.POST)
+	@RequestMapping(value = "/makeOrder", method = RequestMethod.GET)
 	public String makeAnOrder(Principal principal) {
-		User user = userService.getByID(Long.parseLong(principal.getName()));
+		User user = userService.getUserByLogin(principal.getName());
 		Basket basket = basketService.getBasketByUser(user);
 		List<Good> goods = basket.getGoods();
 		Custom custom = new Custom();
-		custom.setUser(userService.getByID(Long.parseLong(principal.getName())));
+		custom.setUser(user);
 		custom.setTimeOfCustom(new Date());
 		custom.setGoods(goods);
 		customService.add(custom);

@@ -42,7 +42,7 @@ public class Good {
 	private List<Basket> basket;
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
-	@JoinTable(name = "CustomGood", joinColumns = { @JoinColumn(name = "goodId", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "custoId", nullable = false) })
+	@JoinTable(name = "CustomGood", joinColumns = { @JoinColumn(name = "goodId", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "customId", nullable = false) })
 	private List<Custom> customs;
 	
 	
@@ -120,23 +120,6 @@ public class Good {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((basket == null) ? 0 : basket.hashCode());
-		result = prime * result
-				+ ((cathegory == null) ? 0 : cathegory.hashCode());
-		result = prime * result + ((customs == null) ? 0 : customs.hashCode());
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result
-				+ ((goodName == null) ? 0 : goodName.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((price == null) ? 0 : price.hashCode());
-		return result;
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -145,20 +128,10 @@ public class Good {
 		if (getClass() != obj.getClass())
 			return false;
 		Good other = (Good) obj;
-		if (basket == null) {
-			if (other.basket != null)
-				return false;
-		} else if (!basket.equals(other.basket))
-			return false;
 		if (cathegory == null) {
 			if (other.cathegory != null)
 				return false;
 		} else if (!cathegory.equals(other.cathegory))
-			return false;
-		if (customs == null) {
-			if (other.customs != null)
-				return false;
-		} else if (!customs.equals(other.customs))
 			return false;
 		if (description == null) {
 			if (other.description != null)

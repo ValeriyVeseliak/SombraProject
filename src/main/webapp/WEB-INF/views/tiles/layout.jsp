@@ -11,8 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title><tiles:getAsString name="title" /></title>
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/message.css" />"
-	rel="stylesheet">
+
 
 <link
 	href="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" />"

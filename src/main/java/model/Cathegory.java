@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ public class Cathegory {
 	private Long id;
 	private String cathName;
 	
-	@OneToMany(mappedBy = "cathegory")
+	@OneToMany(mappedBy = "cathegory", fetch = FetchType.EAGER)
 	private Set<Good> goods = new HashSet<Good>();
 	
 	public static final String GET_CATHEGORY_BY_NAME = "Cathegory.getCathegoryByName";
@@ -63,17 +64,6 @@ public class Cathegory {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((cathName == null) ? 0 : cathName.hashCode());
-		result = prime * result + ((goods == null) ? 0 : goods.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -87,11 +77,6 @@ public class Cathegory {
 				return false;
 		} else if (!cathName.equals(other.cathName))
 			return false;
-		if (goods == null) {
-			if (other.goods != null)
-				return false;
-		} else if (!goods.equals(other.goods))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -99,6 +84,9 @@ public class Cathegory {
 			return false;
 		return true;
 	}
+
+	
+	
 	
 	
 	
