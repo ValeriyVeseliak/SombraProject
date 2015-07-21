@@ -18,10 +18,9 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name = Good.GET_GOOD_BY_CATHEGORY, query="Select g from Good as g Where g.cathegory.cathName=:cathName"),
+	@NamedQuery(name = Good.GET_GOOD_BY_CATHEGORY, query="Select g from Good as g Where g.cathegory=:cathegory"),
 	@NamedQuery(name = Good.GET_GOOD_BY_PRICE,query="Select g from Good as g Where g.price=:price"),
 	@NamedQuery(name = Good.GET_GOOD_BY_CATHEGORY_AND_PRICE, query = "Select g from Good as g Where g.cathegory=:cathegory And g.price<=:price"),
-//	@NamedQuery(name = Good.GET_MAX_PRICE, query = "Select MAX(price) from Good as g")
 })
 public class Good {
 	@Id

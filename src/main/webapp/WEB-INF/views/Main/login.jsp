@@ -71,7 +71,7 @@
 			</div>
 		</div>
 	</sec:authorize>
-	<a href="/SombraStore/signup">Sign up</a>
+	
 
 
 

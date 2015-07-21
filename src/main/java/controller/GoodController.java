@@ -23,6 +23,7 @@ import service.BasketService;
 import service.CathegoryService;
 import service.GoodService;
 import service.UserService;
+import dto.CathegoryDTO;
 import dto.GoodDTO;
 
 @Controller
@@ -44,7 +45,9 @@ public class GoodController {
 	public String AllGoods(Model model) {
 		model.addAttribute("maxPrice", goodService.getMaxPrice());
 		List<GoodDTO> goods = goodService.getAll();
+		List<CathegoryDTO> cathegories = cathegoryService.getAll();
 		model.addAttribute("goods", goods);
+		model.addAttribute("cathegories", cathegories);
 		return "all";
 	}
 
@@ -55,7 +58,7 @@ public class GoodController {
 		return "good";
 	}
 
-	@RequestMapping(value = "/{cathName}", method = RequestMethod.GET)
+	@RequestMapping(value = "/goods/{cathName}", method = RequestMethod.GET)
 	public String AllGoodsOfCathegory(@PathVariable String cathName, Model model) {
 		Cathegory cathegory = cathegoryService.getCathegoryByName(cathName);
 		List<GoodDTO> goodsCath = goodService.getGoodByCathegory(cathegory);
@@ -63,13 +66,10 @@ public class GoodController {
 		return "allCathGoods";
 	}
 
-	@RequestMapping(value = "/{id}/toBasket", method = RequestMethod.GET)
+	@RequestMapping(value = "/toBasket/{id}", method = RequestMethod.GET)
 	public String addGoodToBasket(@PathVariable long id, Principal principal) {
 		User user = userService.getUserByLogin(principal.getName());
 		Good good = goodService.getByID(id);
-		
-		
-		
 		Basket b = basketService.getBasketByUser(userService
 				.getUserByLogin(principal.getName()));
 		
@@ -78,7 +78,6 @@ public class GoodController {
 			goods.add(good);
 			Basket basket = new Basket(user, goods);
 			basketService.add(basket);
-			System.out.println(basket.getId());
 		} else {
 			List<Good> goods = b.getGoods();
 			goods.add(good);
@@ -92,9 +91,16 @@ public class GoodController {
 	public String searchGoodByCathegoryAndKeyword(@RequestParam String keyword,
 			HttpServletRequest request, Model model) {
 		String cathName = request.getParameter("cathName");
-		Cathegory cathegory = cathegoryService.getCathegoryByName(cathName);
-		List<Good> goods = goodService.getGoodBySearch(keyword, cathegory);
-		model.addAttribute("goods", goods);
+		System.out.println("cathName");
+		if(cathName!="ALL"){
+			Cathegory cathegory = cathegoryService.getCathegoryByName(cathName);
+			List<Good> goods = goodService.getGoodBySearch(keyword, cathegory);
+			model.addAttribute("goods", goods);
+		}
+		else{
+			List<Good> goods = goodService.searchGoodFromAll(keyword);
+			model.addAttribute("goods", goods);
+		}
 		return "searchedGoods";
 	}
 

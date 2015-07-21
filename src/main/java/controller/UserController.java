@@ -31,6 +31,11 @@ public class UserController {
 	public String signUp(Model model) {
 		return "signup";
 	}
+	
+	@RequestMapping(value="/no_access")
+	public String noAccess(){
+		return "no_access";
+	}
 
 	
 	@RequestMapping(value = { "/signup/create" }, method = RequestMethod.POST)

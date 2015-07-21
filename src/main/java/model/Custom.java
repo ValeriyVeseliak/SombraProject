@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +30,7 @@ public class Custom {
 	@JoinColumn(name = "userId")
 	private User user;
 
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)
 	@JoinTable(name = "CustomGood", joinColumns = { @JoinColumn(name = "customId", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "goodId", nullable = false) })
 	private List<Good> goods;
 
@@ -93,18 +94,6 @@ public class Custom {
 		this.basket = basket;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((basket == null) ? 0 : basket.hashCode());
-		result = prime * result + ((goods == null) ? 0 : goods.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((timeOfCustom == null) ? 0 : timeOfCustom.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		return result;
-	}
 
 	@Override
 	public boolean equals(Object obj) {

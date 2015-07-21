@@ -27,9 +27,6 @@
 	<div class="header">
 		<tiles:insertAttribute name="header" />
 	</div>
-	<div class="sidebar">
-		<tiles:insertAttribute name="sidebar" />
-	</div>
 	<div class="content">
 		<tiles:insertAttribute name="main_content" />
 	</div>

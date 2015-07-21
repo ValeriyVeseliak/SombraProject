@@ -15,6 +15,8 @@ public interface GoodDao extends BaseDao<Good>{
 	
 	public List<Good> getGoodBySearch(String keyword, Cathegory cathegory);
 	
-	public Good getGoodByCathegoryAndPrice(Cathegory cathegory,Double price);
+	public List<Good> seacrhGoodFromAll(String keyword);
+	
+	public List<Good> getGoodByCathegoryAndPrice(Cathegory cathegory,Double price);
 	
 }

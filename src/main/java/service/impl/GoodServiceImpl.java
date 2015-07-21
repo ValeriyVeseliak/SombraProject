@@ -89,8 +89,13 @@ public class GoodServiceImpl implements GoodService{
 	}
 
 	@Transactional
-	public Good getGoodByCathegoryAndPrice(Cathegory cathegory, Double price) {
+	public List<Good> getGoodByCathegoryAndPrice(Cathegory cathegory, Double price) {
 		return goodDao.getGoodByCathegoryAndPrice(cathegory, price);
+	}
+
+	@Transactional
+	public List<Good> searchGoodFromAll(String keyword) {
+		return goodDao.seacrhGoodFromAll(keyword);
 	}
 
 }

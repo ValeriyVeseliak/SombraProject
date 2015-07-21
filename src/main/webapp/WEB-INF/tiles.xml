@@ -5,18 +5,8 @@
 
 <tiles-definitions>
 
-	<!-- <definition name="base.definition" template="/WEB-INF/views/tiles/layout.jsp">
-		<put-list-attribute name="cathegories">
-			<add-attribute value="/WEB-INF/views/tiles/header.jsp"></add-attribute>
-			<add-attribute value="/WEB-INF/views/tiles/sidebar.jsp"></add-attribute>
-		</put-list-attribute>
-	</definition> -->
-
-
-
 	<definition name="base.definition" template="/WEB-INF/views/tiles/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
-		<put-attribute name="sidebar" value="/WEB-INF/views/tiles/sidebar.jsp" />
 		<put-attribute name="main_content" value="" />
 	</definition>
 
@@ -34,26 +24,13 @@
 		<put-attribute name="title" value="Admin Cabinet" />
 		<put-attribute name="main_content" value="/WEB-INF/views/Admin/admin.jsp" />
 	</definition>
-
+	
 	<definition name="cathegories" extends="base.definition">
-
-
 		<put-attribute name="title" value="Cathegories" />
-		<put-attribute name="main_content"
-			value="/WEB-INF/views/Admin/cathegories.jsp" />
-			
-			
-		<put-list-attribute name="cathegories">
-			<add-attribute value="/WEB-INF/views/tiles/header.jsp"></add-attribute>
-			<add-attribute value="/WEB-INF/views/tiles/sidebar.jsp"></add-attribute>
-		</put-list-attribute>
+		<put-attribute name="main_content" value="/WEB-INF/views/Admin/cathegories.jsp" />
 	</definition>
-
-	<definition name="goodTable" extends="base.definition">
-		<put-attribute name="title" value="Goods" />
-		<put-attribute name="main_content" value="/WEB-INF/views/Admin/goodTable.jsp" />
-	</definition>
-
+	
+	
 	<definition name="orders" extends="base.definition">
 		<put-attribute name="title" value="Orders" />
 		<put-attribute name="main_content" value="/WEB-INF/views/Admin/orders.jsp" />
@@ -102,8 +79,12 @@
 		<put-attribute name="main_content"
 			value="/WEB-INF/views/Good/basket.jsp" />
 	</definition>
-
-
+	
+	<definition name="no_access" extends="base.definition">
+		<put-attribute name="title" value="Error" />
+		<put-attribute name="main_content"
+			value="/WEB-INF/views/Main/no_access.jsp" />
+	</definition>
 
 </tiles-definitions>
 

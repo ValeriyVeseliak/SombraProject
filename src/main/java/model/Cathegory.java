@@ -3,6 +3,7 @@ package model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,7 +23,7 @@ public class Cathegory {
 	private Long id;
 	private String cathName;
 	
-	@OneToMany(mappedBy = "cathegory", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "cathegory", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	private Set<Good> goods = new HashSet<Good>();
 	
 	public static final String GET_CATHEGORY_BY_NAME = "Cathegory.getCathegoryByName";

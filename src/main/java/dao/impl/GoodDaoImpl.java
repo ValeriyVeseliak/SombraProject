@@ -25,7 +25,7 @@ public class GoodDaoImpl extends BaseDaoImpl<Good> implements GoodDao {
 		try {
 			return (List<Good>) entityManager
 					.createNamedQuery(Good.GET_GOOD_BY_CATHEGORY)
-					.setParameter("cathName", cathegory.getCathName())
+					.setParameter("cathegory", cathegory)
 					.getResultList();
 		} catch (NoResultException e) {
 			return null;
@@ -67,13 +67,27 @@ public class GoodDaoImpl extends BaseDaoImpl<Good> implements GoodDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
-	public Good getGoodByCathegoryAndPrice(Cathegory cathegory, Double price) {
+	public List<Good> getGoodByCathegoryAndPrice(Cathegory cathegory, Double price) {
 		try {
-			return (Good) entityManager
+			return (List<Good>) entityManager
 					.createNamedQuery(Good.GET_GOOD_BY_CATHEGORY_AND_PRICE)
 					.setParameter("cathegory", cathegory)
 					.setParameter("price", price).getResultList();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Good> seacrhGoodFromAll(String keyword) {
+		try {
+			return (List<Good>) entityManager
+					.createQuery("Select g from Good Where g.goodName Like :keyword")
+					.setParameter("keyword", '%' + keyword + '%')
+					.getResultList();
 		} catch (NoResultException e) {
 			return null;
 		}

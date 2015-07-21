@@ -11,7 +11,7 @@
 					<p>Price: ${good.price}</p>
 					<p>Details: ${good.description}</p>
 					<sec:authorize access="isAuthenticated()">
-						<a href="/SombraStore/${good.id}/toBasket" class="btn btn-primary"
+						<a href="/SombraStore/toBasket/${good.id}" class="btn btn-primary"
 							role="button">Add to Basket</a>
 					</sec:authorize>
 				</div>

@@ -41,21 +41,25 @@ public class BasketController {
 
 	@RequestMapping()
 	public String getAllGoodInBasket(Model model, Principal principal) {
-		
+		try{
 		User user = userService.getUserByLogin(principal.getName());
-		
 		Basket basket = basketService.getBasketByUser(user);
-		System.out.println(basket.getId());
 		Double sumPrice = (double) 0;
 		List<Good> goods = basket.getGoods();
 		for (Good good : goods) {
-			System.out.println(good);
 			sumPrice += good.getPrice();
-		}
-		int countOfGoods = goods.size();
+		boolean countOfGoods = goods.isEmpty();
+		System.out.println(countOfGoods);
 		model.addAttribute("countOfGoods", countOfGoods);
 		model.addAttribute("sumPrice", sumPrice);
 		model.addAttribute("goods", goods);
+		}
+		}catch(NullPointerException e ){
+			boolean countOfGoods = true;
+			model.addAttribute("countOfGoods", countOfGoods);
+			return "basket";
+		}
+		
 		return "basket";
 	}
 
@@ -88,6 +92,8 @@ public class BasketController {
 		custom.setGoods(goods);
 		customService.add(custom);
 		goods.clear();
+		basket.setGoods(goods);
+		basketService.update(basket);
 		return "success";
 	}
 

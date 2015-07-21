@@ -3,6 +3,28 @@
 	prefix="sec"%>
 
 
+
+<%-- <form action="/SombraStore/search/">
+<input type="text" name = "keyword" >
+<select name="cathName">
+	<option value="ALL">All cathegories</option>
+	<c:forEach items="${cathegories}" var="cathegory">
+		<option value="${cathegory.cathName}">${cathegory.cathName}</option>
+	</c:forEach>
+</select>
+<input type="submit" value="Search" ></a>
+</form> --%>
+
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+<a href="/SombraStore/admin/">Admin</a>
+</sec:authorize>
+
+<sec:authorize access="hasRole('ROLE_USER')">
+<c:forEach items="${cathegories}" var = "cathegory">
+	<a href="/SombraStore/goods/${cathegory.cathName}/">${cathegory.cathName}</a>
+</c:forEach>
+</sec:authorize>
+
 <c:forEach items="${goods}" var="good">
 	<div class="row">
 		<div class=".col-sm-6">
@@ -13,7 +35,7 @@
 					<p>Price: ${good.price}</p>
 					<p>Details: ${good.description}</p>
 					<sec:authorize access="isAuthenticated()">
-						<a href="/SombraStore/${good.id}/toBasket" class="btn btn-primary"
+						<a href="/SombraStore/toBasket/${good.id}" class="btn btn-primary"
 							role="button">Add to Basket</a>
 					</sec:authorize>
 				</div>
@@ -23,7 +45,12 @@
 </c:forEach>
 
 
-<select>
+<sec:authorize access="isAuthenticated()">
+			<a href="<c:url value="/j_spring_security_logout"/>"> Log Out
+			</a>
+		</sec:authorize>
+
+<%-- <select>
 	<option value="5">9</option>
 	<option value="10">10</option>
 	<option value="25">25</option>
@@ -33,7 +60,7 @@
 <input type=range min=0 max="${maxPrice}" value="${maxPrice}" id=price
 	oninput="outputUpdate(value)" step=10>
 <output for=price id=newPrice>${maxPrice}</output>
-
+ --%>
 
 <script>
 	function outputUpdate(vol) {

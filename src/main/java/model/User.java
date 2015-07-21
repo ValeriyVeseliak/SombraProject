@@ -41,7 +41,7 @@ public class User{
 	private UserRole role;
 	
 	@OneToOne(cascade=CascadeType.ALL, targetEntity=Basket.class, mappedBy="user")
-	private Basket basket;
+	private Basket basket = new Basket();
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="user" , fetch = FetchType.EAGER)
 	private Set<Custom> customs;
@@ -144,24 +144,7 @@ public class User{
 		this.customs = customs;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((basket == null) ? 0 : basket.hashCode());
-		result = prime * result + ((customs == null) ? 0 : customs.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result
-				+ ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result
-				+ ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		return result;
-	}
+
 
 	@Override
 	public boolean equals(Object obj) {
