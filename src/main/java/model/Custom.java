@@ -1,8 +1,7 @@
 package model;
 
 import java.util.Date;
-import java.util.List;
-
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,28 +29,32 @@ public class Custom {
 	@JoinColumn(name = "userId")
 	private User user;
 
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinTable(name = "CustomGood", joinColumns = { @JoinColumn(name = "customId", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "goodId", nullable = false) })
-	private List<Good> goods;
+	private Set<Good> goods;
 
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private Basket basket;
 
 	private Date timeOfCustom;
 
+	private double priceOfOrder;
+
 	public Custom() {
 	}
 
-	public Custom(User user, List<Good> goods) {
+	public Custom(User user, Set<Good> goods) {
 		this.user = user;
 		this.goods = goods;
 	}
 
-	public Custom(User user, List<Good> goods, Basket basket, Date timeOfCustom) {
+	public Custom(User user, Set<Good> goods, Basket basket, Date timeOfCustom,
+			double priceOfOrder) {
 		this.user = user;
 		this.goods = goods;
 		this.basket = basket;
 		this.timeOfCustom = timeOfCustom;
+		this.priceOfOrder = priceOfOrder;
 	}
 
 	public Date getTimeOfCustom() {
@@ -78,11 +81,11 @@ public class Custom {
 		this.user = user;
 	}
 
-	public List<Good> getGoods() {
+	public Set<Good> getGoods() {
 		return goods;
 	}
 
-	public void setGoods(List<Good> goods) {
+	public void setGoods(Set<Good> goods) {
 		this.goods = goods;
 	}
 
@@ -94,6 +97,13 @@ public class Custom {
 		this.basket = basket;
 	}
 
+	public double getPriceOfOrder() {
+		return priceOfOrder;
+	}
+
+	public void setPriceOfOrder(double priceOfOrder) {
+		this.priceOfOrder = priceOfOrder;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -119,6 +129,9 @@ public class Custom {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (Double.doubleToLongBits(priceOfOrder) != Double
+				.doubleToLongBits(other.priceOfOrder))
+			return false;
 		if (timeOfCustom == null) {
 			if (other.timeOfCustom != null)
 				return false;
@@ -132,5 +145,4 @@ public class Custom {
 		return true;
 	}
 
-	
 }

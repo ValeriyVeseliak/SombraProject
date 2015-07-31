@@ -12,13 +12,15 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 
+<h1 style="text-align:center">Admin profile</h1>
+
 <div>
 	<ul class="nav nav-tabs">
 		<li role="presentation" > <a
 			href="/SombraStore/admin/">Goods</a></li>
-		<li role="presentation"><a href="/SombraStore/admin/cathegories">Cathegories</a></li>
+		<li role="presentation"><a href="/SombraStore/admin/cathegories">Categories</a></li>
 		<li role="presentation"><a href="/SombraStore/admin/users">Users</a></li>
-		<li role="presentation"><a href="/SombraStore/admin/orders" class="active">Orders</a></li>
+		<li role="presentation" class="active"><a href="/SombraStore/admin/orders" >Orders</a></li>
 		
 	</ul>
 </div>
@@ -30,9 +32,9 @@
 		<th>User</th>
 		<th>Goods</th>
 		<th>Date</th>
+		<th>Price</th>
 	</tr>
 	<c:forEach items="${orders}" var="order">
-
 		<tr>
 			<td>${order.id}</td>
 			<td style="width: 200px">${order.user.firstName} ${order.user.lastName}</td>
@@ -42,9 +44,9 @@
 					<p>${good.goodName}</p>
 				</c:forEach>
 			</td>
-
-			<td>${order.date}</td>
-			
+			<td><fmt:formatDate pattern="dd-MM-yyyy HH:mm"
+					value="${order.date}" /></td>
+			<td>${order.priceOfOrder}</td>
 		</tr>
 	</c:forEach>
 </table>

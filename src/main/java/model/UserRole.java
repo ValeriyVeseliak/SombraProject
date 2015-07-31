@@ -1,10 +1,9 @@
 package model;
 
 public enum UserRole {
-	ROLE_ADMIN, ROLE_USER, ROLE_ANONYMOUS ;
+	ROLE_ADMIN, ROLE_USER, ROLE_ANONYMOUS;
 
 	UserRole() {
 	}
-	
-	
+
 }

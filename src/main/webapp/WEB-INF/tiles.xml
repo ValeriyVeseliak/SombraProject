@@ -57,12 +57,6 @@
 		<put-attribute name="main_content" value="/WEB-INF/views/Good/good.jsp" />
 	</definition>
 
-	<definition name="successAdding" extends="base.definition">
-		<put-attribute name="title" value="Success Adding" />
-		<put-attribute name="main_content"
-			value="/WEB-INF/views/Good/successAdding.jsp" />
-	</definition>
-
 	<definition name="success" extends="base.definition">
 		<put-attribute name="title" value="Success" />
 		<put-attribute name="main_content" value="/WEB-INF/views/Good/success.jsp" />

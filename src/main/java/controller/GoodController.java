@@ -1,8 +1,9 @@
 package controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -45,16 +46,19 @@ public class GoodController {
 	public String AllGoods(Model model) {
 		model.addAttribute("maxPrice", goodService.getMaxPrice());
 		List<GoodDTO> goods = goodService.getAll();
-		List<CathegoryDTO> cathegories = cathegoryService.getAll();
 		model.addAttribute("goods", goods);
+		List<CathegoryDTO> cathegories = cathegoryService.getAll();
 		model.addAttribute("cathegories", cathegories);
 		return "all";
 	}
 
 	@RequestMapping(value = "/good/{id}", method = RequestMethod.GET)
 	public String getGood(Model model, @PathVariable long id) {
+		List<CathegoryDTO> cathegories = cathegoryService.getAll();
+		model.addAttribute("cathegories", cathegories);
 		Good good = goodService.getByID(id);
 		model.addAttribute("good", good);
+		model.addAttribute("cathegory", good.getCathegory());
 		return "good";
 	}
 
@@ -63,6 +67,9 @@ public class GoodController {
 		Cathegory cathegory = cathegoryService.getCathegoryByName(cathName);
 		List<GoodDTO> goodsCath = goodService.getGoodByCathegory(cathegory);
 		model.addAttribute("goods", goodsCath);
+		List<CathegoryDTO> cathegories = cathegoryService.getAll();
+		model.addAttribute("cathegories", cathegories);
+		model.addAttribute("cathegory", cathegory);
 		return "allCathGoods";
 	}
 
@@ -72,14 +79,14 @@ public class GoodController {
 		Good good = goodService.getByID(id);
 		Basket b = basketService.getBasketByUser(userService
 				.getUserByLogin(principal.getName()));
-		
+
 		if (b == null) {
-			List<Good> goods = new ArrayList<Good>();
+			Set<Good> goods = new HashSet<Good>();
 			goods.add(good);
 			Basket basket = new Basket(user, goods);
 			basketService.add(basket);
 		} else {
-			List<Good> goods = b.getGoods();
+			Set<Good> goods = b.getGoods();
 			goods.add(good);
 			b.setGoods(goods);
 			basketService.update(b);
@@ -91,16 +98,19 @@ public class GoodController {
 	public String searchGoodByCathegoryAndKeyword(@RequestParam String keyword,
 			HttpServletRequest request, Model model) {
 		String cathName = request.getParameter("cathName");
-		System.out.println("cathName");
-		if(cathName!="ALL"){
+		List<CathegoryDTO> cathegories = cathegoryService.getAll();
+		model.addAttribute("cathegories", cathegories);
+		if (cathName.equals("ALL")) {
+			List<GoodDTO> goods = goodService.searchGoodFromAll(keyword);
+			model.addAttribute("goods", goods);
+		} else {
 			Cathegory cathegory = cathegoryService.getCathegoryByName(cathName);
-			List<Good> goods = goodService.getGoodBySearch(keyword, cathegory);
+			List<GoodDTO> goods = goodService.searchGoodFromCathegory(keyword,
+					cathegory);
 			model.addAttribute("goods", goods);
 		}
-		else{
-			List<Good> goods = goodService.searchGoodFromAll(keyword);
-			model.addAttribute("goods", goods);
-		}
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("cathName", cathName);
 		return "searchedGoods";
 	}
 

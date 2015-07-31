@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF8"
 	pageEncoding="UTF8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <script
@@ -11,12 +10,13 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
+<h1 style="text-align:center">Admin profile</h1>
 
 <div>
 	<ul class="nav nav-tabs">
 		<li role="presentation" > <a
 			href="/SombraStore/admin/">Goods</a></li>
-		<li role="presentation"><a href="/SombraStore/admin/cathegories" class="active">Cathegories</a></li>
+		<li role="presentation" class="active"><a href="/SombraStore/admin/cathegories" >Categories</a></li>
 		<li role="presentation"><a href="/SombraStore/admin/users">Users</a></li>
 		<li role="presentation"><a href="/SombraStore/admin/orders" >Orders</a></li>
 		
@@ -44,7 +44,7 @@
 
 
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
-	data-target="#myModal2">Create Cathegory</button>
+	data-target="#myModal2">Create Category</button>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
@@ -56,12 +56,12 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title" id="myModalLabel">Create Cathegory</h4>
+				<h4 class="modal-title" id="myModalLabel">Create Category</h4>
 			</div>
 			<div class="modal-body">
 				<form action="/SombraStore/admin/cathegories/create">
 					<div class="form-group">
-						<label for="cathName"> Name of cathegory</label> <input type="text"
+						<label for="cathName"> Name of category</label> <input type="text"
 							name="cathName">
 					</div>
 					<div class="modal-footer">

@@ -13,13 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import service.BasketService;
 import dao.BasketDao;
 
-
 @Service
-public class BasketServiceImpl implements BasketService{
-	
+public class BasketServiceImpl implements BasketService {
+
 	@Inject
 	BasketDao basketDao;
-
 
 	@Transactional
 	public void add(Basket basket) {
@@ -50,5 +48,5 @@ public class BasketServiceImpl implements BasketService{
 	public Basket getBasketByUser(User user) {
 		return basketDao.getBasketByUser(user);
 	}
-	
+
 }

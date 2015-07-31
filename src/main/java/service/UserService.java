@@ -7,6 +7,7 @@ import dto.UserDTO;
 
 
 public interface UserService {
+	
 	public void add(User user);
 
 	public User update(User user);
@@ -22,4 +23,6 @@ public interface UserService {
 	public User getUserByFirstLastName(String firstName, String lastName);
 	
 	public User getUserByLogin(String login);
+	
+	public List<User> getAllUsers();
 }

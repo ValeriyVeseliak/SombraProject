@@ -18,33 +18,31 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name = Good.GET_GOOD_BY_CATHEGORY, query="Select g from Good as g Where g.cathegory=:cathegory"),
-	@NamedQuery(name = Good.GET_GOOD_BY_PRICE,query="Select g from Good as g Where g.price=:price"),
-	@NamedQuery(name = Good.GET_GOOD_BY_CATHEGORY_AND_PRICE, query = "Select g from Good as g Where g.cathegory=:cathegory And g.price<=:price"),
-})
+		@NamedQuery(name = Good.GET_GOOD_BY_CATHEGORY, query = "Select g from Good as g Where g.cathegory=:cathegory"),
+		@NamedQuery(name = Good.GET_GOOD_BY_PRICE, query = "Select g from Good as g Where g.price=:price"),
+		@NamedQuery(name = Good.GET_GOOD_BY_CATHEGORY_AND_PRICE, query = "Select g from Good as g Where g.cathegory=:cathegory And g.price<=:price"), })
 public class Good {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String goodName;
-	
+
 	@Column(name = "price")
 	private Double price;
 	private String description;
-	
-	@ManyToOne(cascade=CascadeType.PERSIST)
-	@JoinColumn(name="cathegoryId")
+
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "cathegoryId")
 	private Cathegory cathegory;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "BasketGood", joinColumns = { @JoinColumn(name = "goodId", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "basketId", nullable = false) })
 	private List<Basket> basket;
-	
-	@ManyToMany(cascade = CascadeType.PERSIST)
+
+	@ManyToMany(cascade = CascadeType.REMOVE)
 	@JoinTable(name = "CustomGood", joinColumns = { @JoinColumn(name = "goodId", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "customId", nullable = false) })
 	private List<Custom> customs;
-	
-	
+
 	public static final String GET_GOOD_BY_CATHEGORY = "Good.getGoodByCathegory";
 	public static final String GET_GOOD_BY_PRICE = "Good.getGoodByPrice";
 	public static final String GET_MAX_PRICE = "Good.getMaxPrice";
@@ -100,7 +98,6 @@ public class Good {
 	public void setCathegory(Cathegory cathegory) {
 		this.cathegory = cathegory;
 	}
-	
 
 	public List<Basket> getBasket() {
 		return basket;
@@ -154,10 +151,5 @@ public class Good {
 			return false;
 		return true;
 	}
-
-	
-	
-	
-	
 
 }

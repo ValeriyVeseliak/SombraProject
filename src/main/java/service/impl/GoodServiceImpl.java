@@ -17,25 +17,24 @@ import dao.GoodDao;
 import dto.GoodDTO;
 
 @Service
-public class GoodServiceImpl implements GoodService{
-	
+public class GoodServiceImpl implements GoodService {
+
 	@Inject
 	GoodDao goodDao;
-	
+
 	@Inject
 	CathegoryDao cathegoryDao;
-	
-	
+
 	@Transactional
 	public List<GoodDTO> getAll() {
 		List<GoodDTO> dtos = new ArrayList<>();
 		for (Good good : goodDao.getAll()) {
-			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good.getPrice(), good
-					.getDescription(),good.getCathegory()));
+			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good
+					.getPrice(), good.getDescription(), good.getCathegory()));
 		}
 		return dtos;
 	}
-	
+
 	@Transactional
 	public Good getByID(Long id) {
 		Good good = goodDao.getByID(id);
@@ -51,6 +50,7 @@ public class GoodServiceImpl implements GoodService{
 	public Good update(Good good) {
 		return goodDao.update(good);
 	}
+
 	@Transactional
 	public void delete(Good good) {
 		goodDao.delete(good);
@@ -65,13 +65,12 @@ public class GoodServiceImpl implements GoodService{
 	public List<GoodDTO> getGoodByCathegory(Cathegory cathegory) {
 		List<GoodDTO> dtos = new ArrayList<GoodDTO>();
 		for (Good good : goodDao.getGoodByCathegory(cathegory)) {
-			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good.getPrice(), good
-					.getDescription(),good.getCathegory()));
+			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good
+					.getPrice(), good.getDescription(), good.getCathegory()));
 		}
 		return dtos;
-		
+
 	}
-		
 
 	@Transactional
 	public Good getGoodByPrice(Double price) {
@@ -84,18 +83,38 @@ public class GoodServiceImpl implements GoodService{
 	}
 
 	@Transactional
-	public List<Good> getGoodBySearch(String keyword, Cathegory cathegory) {
-		return goodDao.getGoodBySearch(keyword, cathegory);
+	public List<GoodDTO> getGoodByCathegoryAndPrice(Cathegory cathegory,
+			Double price) {
+		List<GoodDTO> dtos = new ArrayList<GoodDTO>();
+		List<Good> goods = goodDao.getGoodByCathegoryAndPrice(cathegory, price);
+		for (Good good : goods) {
+			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good
+					.getPrice(), good.getDescription(), good.getCathegory()));
+		}
+		return dtos;
 	}
 
 	@Transactional
-	public List<Good> getGoodByCathegoryAndPrice(Cathegory cathegory, Double price) {
-		return goodDao.getGoodByCathegoryAndPrice(cathegory, price);
+	public List<GoodDTO> searchGoodFromCathegory(String keyword,
+			Cathegory cathegory) {
+		List<GoodDTO> dtos = new ArrayList<GoodDTO>();
+		List<Good> goods = goodDao.searchGoodFromCathegory(keyword, cathegory);
+		for (Good good : goods) {
+			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good
+					.getPrice(), good.getDescription(), good.getCathegory()));
+		}
+		return dtos;
 	}
 
 	@Transactional
-	public List<Good> searchGoodFromAll(String keyword) {
-		return goodDao.seacrhGoodFromAll(keyword);
+	public List<GoodDTO> searchGoodFromAll(String keyword) {
+		List<GoodDTO> dtos = new ArrayList<GoodDTO>();
+		List<Good> goods = goodDao.searchGoodFromAll(keyword);
+		for (Good good : goods) {
+			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good
+					.getPrice(), good.getDescription(), good.getCathegory()));
+		}
+		return dtos;
 	}
 
 }

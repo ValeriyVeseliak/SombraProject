@@ -14,21 +14,19 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
-@NamedQueries({
-	@NamedQuery(name = Cathegory.GET_CATHEGORY_BY_NAME, query = "Select c from Cathegory as c Where c.cathName=:cathName")
-})
+@NamedQueries({ @NamedQuery(name = Cathegory.GET_CATHEGORY_BY_NAME, query = "Select c from Cathegory as c Where c.cathName=:cathName") })
 public class Cathegory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String cathName;
-	
-	@OneToMany(mappedBy = "cathegory", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "cathegory", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private Set<Good> goods = new HashSet<Good>();
-	
+
 	public static final String GET_CATHEGORY_BY_NAME = "Cathegory.getCathegoryByName";
-	
-	public Cathegory(){
+
+	public Cathegory() {
 	}
 
 	public Cathegory(String cathName) {
@@ -86,9 +84,4 @@ public class Cathegory {
 		return true;
 	}
 
-	
-	
-	
-	
-	
 }

@@ -25,8 +25,7 @@ public class GoodDaoImpl extends BaseDaoImpl<Good> implements GoodDao {
 		try {
 			return (List<Good>) entityManager
 					.createNamedQuery(Good.GET_GOOD_BY_CATHEGORY)
-					.setParameter("cathegory", cathegory)
-					.getResultList();
+					.setParameter("cathegory", cathegory).getResultList();
 		} catch (NoResultException e) {
 			return null;
 		}
@@ -55,21 +54,8 @@ public class GoodDaoImpl extends BaseDaoImpl<Good> implements GoodDao {
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Good> getGoodBySearch(String keyword, Cathegory cathegory) {
-		try {
-			return (List<Good>) entityManager
-					.createQuery(
-							"Select g from Good as g Where g.goodName Like :keyword, g.cathegory =:cathegory")
-					.setParameter("keyword", '%' + keyword + '%')
-					.setParameter("cathegory", cathegory).getResultList();
-		} catch (NoResultException e) {
-			return null;
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public List<Good> getGoodByCathegoryAndPrice(Cathegory cathegory, Double price) {
+	public List<Good> getGoodByCathegoryAndPrice(Cathegory cathegory,
+			Double price) {
 		try {
 			return (List<Good>) entityManager
 					.createNamedQuery(Good.GET_GOOD_BY_CATHEGORY_AND_PRICE)
@@ -82,14 +68,31 @@ public class GoodDaoImpl extends BaseDaoImpl<Good> implements GoodDao {
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Good> seacrhGoodFromAll(String keyword) {
+	public List<Good> searchGoodFromCathegory(String keyword,
+			Cathegory cathegory) {
 		try {
 			return (List<Good>) entityManager
-					.createQuery("Select g from Good Where g.goodName Like :keyword")
+					.createQuery(
+							"Select g from Good as g Where g.goodName Like :keyword AND g.cathegory =:cathegory")
+					.setParameter("keyword", '%' + keyword + '%')
+					.setParameter("cathegory", cathegory).getResultList();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Good> searchGoodFromAll(String keyword) {
+		try {
+			return (List<Good>) entityManager
+					.createQuery(
+							"Select g from Good as g Where g.goodName Like :keyword")
 					.setParameter("keyword", '%' + keyword + '%')
 					.getResultList();
 		} catch (NoResultException e) {
 			return null;
 		}
 	}
+
 }

@@ -1,7 +1,6 @@
 package model;
 
-import java.util.List;
-
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,43 +14,38 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
-
 @Entity
-@NamedQueries({
-	@NamedQuery(name = Basket.GET_BASKET_BY_USER , query = "Select b from Basket as b where b.user=:user")
-})
+@NamedQueries({ @NamedQuery(name = Basket.GET_BASKET_BY_USER, query = "Select b from Basket as b where b.user=:user") })
 public class Basket {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	
-	@OneToOne(cascade=CascadeType.PERSIST)
+
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private User user;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, targetEntity = Good.class)
 	@JoinTable(name = "BasketGood", joinColumns = { @JoinColumn(name = "basketId", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "goodId", nullable = false) })
-	private List<Good> goods;
-	
-	@OneToOne(mappedBy="basket", cascade = CascadeType.PERSIST)
+	private Set<Good> goods;
+
+	@OneToOne(mappedBy = "basket", cascade = CascadeType.PERSIST)
 	private Custom custom;
-	
+
 	public static final String GET_BASKET_BY_USER = "Basket.GetBasketByUser";
-	
-	
-	public Basket(){
+
+	public Basket() {
 	}
-	
-	public Basket(User user){
+
+	public Basket(User user) {
 		this.user = user;
 	}
-	
-	public Basket(User user, List<Good> goods) {
+
+	public Basket(User user, Set<Good> goods) {
 		this.user = user;
 		this.goods = goods;
 	}
 
-	public Basket(User user, Custom custom, List<Good> goods) {
+	public Basket(User user, Custom custom, Set<Good> goods) {
 		this.user = user;
 		this.goods = goods;
 		this.custom = custom;
@@ -73,11 +67,11 @@ public class Basket {
 		this.user = user;
 	}
 
-	public List<Good> getGoods() {
+	public Set<Good> getGoods() {
 		return goods;
 	}
 
-	public void setGoods(List<Good> goods) {
+	public void setGoods(Set<Good> goods) {
 		this.goods = goods;
 	}
 
@@ -132,8 +126,4 @@ public class Basket {
 		return true;
 	}
 
-	
-	
-	
-	
 }

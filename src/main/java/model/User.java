@@ -16,14 +16,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-
 @Entity
 @NamedQueries({
-	@NamedQuery(name = User.GET_USER_BY_FIRST_LAST_NAME,query = "Select u from User as u Where u.lastName=:lname And u.firstName = :fname"),
-	@NamedQuery(name =User.GET_USER_BY_LOGIN_PASSWORD, query = "Select u from User as u Where u.login=:login And u.password = :password"),
-	@NamedQuery(name = User.GET_USER_BY_LOGIN, query = "Select u from User as u Where u.login=:login")
-})
-public class User{
+		@NamedQuery(name = User.GET_USER_BY_FIRST_LAST_NAME, query = "Select u from User as u Where u.lastName=:lname And u.firstName = :fname"),
+		@NamedQuery(name = User.GET_USER_BY_LOGIN_PASSWORD, query = "Select u from User as u Where u.login=:login And u.password = :password"),
+		@NamedQuery(name = User.GET_USER_BY_LOGIN, query = "Select u from User as u Where u.login=:login") })
+public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -31,31 +29,29 @@ public class User{
 	private String lastName;
 	@Column(length = 30, unique = true, nullable = false)
 	private String email;
-	@Column(length = 30, unique = true, nullable = false)	
+	@Column(length = 30, unique = true, nullable = false)
 	private String login;
 	@Column(length = 25, nullable = false)
 	private String password;
-	
-	
+
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
-	
-	@OneToOne(cascade=CascadeType.ALL, targetEntity=Basket.class, mappedBy="user")
+
+	@OneToOne(cascade = CascadeType.ALL, targetEntity = Basket.class, mappedBy = "user")
 	private Basket basket = new Basket();
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="user" , fetch = FetchType.EAGER)
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
 	private Set<Custom> customs;
-	
-	
+
 	public static final String GET_USER_BY_LOGIN_PASSWORD = "User.getUserByLoginPassword";
 	public static final String GET_USER_BY_FIRST_LAST_NAME = "User.getUserByFirstLastName";
 	public static final String GET_USER_BY_LOGIN = "User.getUserByLogin";
-	
-	public User(){
+
+	public User() {
 	}
-	
-	public User(String firstName, String lastName, String email,
-			String login, String password, UserRole role) {
+
+	public User(String firstName, String lastName, String email, String login,
+			String password, UserRole role) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -63,8 +59,7 @@ public class User{
 		this.password = password;
 		this.role = role;
 	}
-	
-	
+
 	public User(Long id, String firstName, String lastName, String email,
 			String login, String password, UserRole role, Basket basket,
 			Set<Custom> customs) {
@@ -79,9 +74,6 @@ public class User{
 		this.basket = basket;
 		this.customs = customs;
 	}
-	
-
-	
 
 	public UserRole getRole() {
 		return role;
@@ -94,36 +86,47 @@ public class User{
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getLogin() {
 		return login;
 	}
+
 	public void setLogin(String login) {
 		this.login = login;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -143,8 +146,6 @@ public class User{
 	public void setCustoms(Set<Custom> customs) {
 		this.customs = customs;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -200,8 +201,4 @@ public class User{
 		return true;
 	}
 
-	
-	
-	
-	
 }

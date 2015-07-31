@@ -22,7 +22,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private UserDao userDao;
 
 	@Transactional
-	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String login)
+			throws UsernameNotFoundException {
 
 		model.User userEntity = userDao.getUserByLogin(login);
 
@@ -30,12 +31,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("Error in email, or password");
 
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		 UserRole role =  userEntity.getRole();
-		 
-		 authorities.add(new SimpleGrantedAuthority(role.name()));
-		 
-		return new org.springframework.security.core.userdetails.User(userEntity.getLogin(),
-				userEntity.getPassword(), authorities);
+		UserRole role = userEntity.getRole();
+
+		authorities.add(new SimpleGrantedAuthority(role.name()));
+
+		return new org.springframework.security.core.userdetails.User(
+				userEntity.getLogin(), userEntity.getPassword(), authorities);
 	}
 
 }

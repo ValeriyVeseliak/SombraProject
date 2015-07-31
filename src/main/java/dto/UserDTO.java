@@ -1,7 +1,5 @@
 package dto;
 
-import model.UserRole;
-
 public class UserDTO {
 	private Long id;
 	private String firstName;
@@ -9,10 +7,9 @@ public class UserDTO {
 	private String email;
 	private String login;
 	private String password;
-	private UserRole role;
-	
+
 	public UserDTO(Long id, String firstName, String lastName, String email,
-			String login, String password, UserRole userRole) {
+			String login, String password) {
 	}
 
 	public Long getId() {
@@ -63,12 +60,4 @@ public class UserDTO {
 		this.password = password;
 	}
 
-	public UserRole getRole() {
-		return role;
-	}
-
-	public void setRole(UserRole role) {
-		this.role = role;
-	}
-	
 }

@@ -23,7 +23,6 @@ import service.UserService;
 import dto.CathegoryDTO;
 import dto.CustomDTO;
 import dto.GoodDTO;
-import dto.UserDTO;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -52,11 +51,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public String showAllUsers(Model model) {
-		List<UserDTO> users = userService.getAll();
-		System.out.println(users.isEmpty());
-		for (UserDTO userDTO : users) {
-			System.out.println(userDTO.getEmail());
-		}
+		List<User> users = userService.getAllUsers();
 		model.addAttribute("users", users);
 		return "users";
 
@@ -81,7 +76,7 @@ public class AdminController {
 		user.setLogin(login);
 		user.setPassword(password);
 		userService.update(user);
-		return "redirect:/users";
+		return "redirect:/admin/users";
 	}
 
 	@RequestMapping(value = "/cathegories", method = RequestMethod.GET)
@@ -142,7 +137,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)
 	public String getAllOrders(Model model) {
-		List<CustomDTO> orders=customService.getAll();
+		List<CustomDTO> orders = customService.getAll();
 		model.addAttribute("orders", orders);
 		return "orders";
 	}

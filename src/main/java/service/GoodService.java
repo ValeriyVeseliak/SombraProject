@@ -7,6 +7,7 @@ import model.Cathegory;
 import model.Good;
 
 public interface GoodService {
+	
 	public void add(Good good);
 
 	public Good update(Good good);
@@ -23,10 +24,9 @@ public interface GoodService {
 	
 	public Double getMaxPrice();
 	
-	public List<Good> getGoodBySearch(String keyword, Cathegory cathegory);
+	public List<GoodDTO> getGoodByCathegoryAndPrice(Cathegory cathegory, Double price);
 	
-	public List<Good> getGoodByCathegoryAndPrice(Cathegory cathegory, Double price);
+	public List<GoodDTO> searchGoodFromCathegory(String keyword, Cathegory cathegory);
 	
-	public List<Good> searchGoodFromAll(String keyword);
-	
+	public List<GoodDTO> searchGoodFromAll(String keyword);
 }

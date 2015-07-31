@@ -6,6 +6,7 @@ import dto.CustomDTO;
 import model.Custom;
 
 public interface CustomService {
+	
 	public void add(Custom Custom);
 
 	public Custom update(Custom Custom);
