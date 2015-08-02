@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import model.User;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,7 +43,10 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional
 	public void add(User user) {
-		userDao.add(user);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+		String pass = encoder.encode(user.getPassword());
+		User user2 = new User(user.getFirstName(), user.getLastName(), user.getEmail(), user.getLogin(), pass, user.getPhoneNumber(), user.getRole(), user.getIsEnabled());
+		userDao.add(user2);
 	}
 
 	@Transactional

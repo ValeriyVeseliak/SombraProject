@@ -40,16 +40,18 @@
 	<c:forEach items="${users}" var="user">
 		<tr>
 			<td>${user.id}</td>
-			<td>${user.firstName} ${user.lastName}</td>
+			<td>${user.firstName}${user.lastName}</td>
 			<td>${user.email}</td>
 			<td>${user.phoneNumber}</td>
 			<td>${user.login}</td>
 			<td>${user.password}</td>
-			<td><a href="/SombraStore/admin/users/${user.id}/state"> <c:if test="${user.isEnabled == true}">
+			<td><a href="/SombraStore/admin/users/${user.id}/state"> <c:if
+						test="${user.isEnabled == true}">
 						<input type="button" value="Ban">
 					</c:if> <c:if test="${user.isEnabled == false}">
-						<input type="button" value="Active"></a> </c:if>
-			</td>
+						<input type="button" value="Active">
+					</c:if>
+			</a></td>
 
 			<td>
 				<button type="button" class="btn btn-primary btn-sm"
@@ -91,8 +93,8 @@
 											value="${user.password}" name="password">
 									</div>
 									<div class="form-group">
-										<label for="phoneNumber">Phone number</label> <input type="text"
-											value="${user.phoneNumber}" name="phoneNumber">
+										<label for="phoneNumber">Phone number</label> <input
+											type="text" value="${user.phoneNumber}" name="phoneNumber">
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default"

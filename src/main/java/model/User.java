@@ -31,7 +31,7 @@ public class User {
 	private String email;
 	@Column(length = 30, unique = true, nullable = false)
 	private String login;
-	@Column(length = 25, nullable = false)
+	@Column(length = 60, nullable = false)
 	private String password;
 	private String phoneNumber;
 	private Boolean isEnabled;

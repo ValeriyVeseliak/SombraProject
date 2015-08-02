@@ -20,7 +20,7 @@
 	</div>
 	<div class="form-group" id="eform">
 		<label for="phoneNumber">Phone number</label> <input type="text"
-			class="form-control" placeholder="Email" name="phoneNumber" required>
+			class="form-control" placeholder="Phone number" name="phoneNumber" required>
 	</div>
 	<div class="form-group" id="lform">
 		<label for="login">Login</label> <input type="text"
