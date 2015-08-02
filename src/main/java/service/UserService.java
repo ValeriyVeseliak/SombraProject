@@ -23,6 +23,5 @@ public interface UserService {
 	public User getUserByFirstLastName(String firstName, String lastName);
 	
 	public User getUserByLogin(String login);
-	
-	public List<User> getAllUsers();
+
 }

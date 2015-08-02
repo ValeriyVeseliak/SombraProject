@@ -12,14 +12,14 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 
-<h1 style="text-align:center">Admin profile</h1>
+<h1 style="text-align: center">Admin profile</h1>
 
 <div>
 	<ul class="nav nav-tabs">
 		<li role="presentation"><a href="/SombraStore/admin/">Goods</a></li>
 		<li role="presentation"><a href="/SombraStore/admin/cathegories">Categories</a></li>
-		<li role="presentation" class="active"><a href="/SombraStore/admin/users"
-			>Users</a></li>
+		<li role="presentation" class="active"><a
+			href="/SombraStore/admin/users">Users</a></li>
 		<li role="presentation"><a href="/SombraStore/admin/orders">Orders</a></li>
 
 	</ul>
@@ -30,8 +30,10 @@
 		<th style="width: 40px">Id</th>
 		<th>First Last name</th>
 		<th>Email</th>
+		<th>Phone</th>
 		<th>Login</th>
 		<th>Password</th>
+		<th>State</th>
 		<th>Update</th>
 		<th>Delete</th>
 	</tr>
@@ -40,12 +42,18 @@
 			<td>${user.id}</td>
 			<td>${user.firstName} ${user.lastName}</td>
 			<td>${user.email}</td>
+			<td>${user.phoneNumber}</td>
 			<td>${user.login}</td>
 			<td>${user.password}</td>
+			<td><a href="/SombraStore/admin/users/${user.id}/state"> <c:if test="${user.isEnabled == true}">
+						<input type="button" value="Ban">
+					</c:if> <c:if test="${user.isEnabled == false}">
+						<input type="button" value="Active"></a> </c:if>
+			</td>
+
 			<td>
 				<button type="button" class="btn btn-primary btn-sm"
-					data-toggle="modal" data-target="#${user.id}">Update</button> 
-					<!-- Modal -->
+					data-toggle="modal" data-target="#${user.id}">Update</button> <!-- Modal -->
 				<div class="modal fade" id="${user.id}" tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel">
 					<div class="modal-dialog" role="document">
@@ -81,6 +89,10 @@
 									<div class="form-group">
 										<label for="password">Password</label> <input type="text"
 											value="${user.password}" name="password">
+									</div>
+									<div class="form-group">
+										<label for="phoneNumber">Phone number</label> <input type="text"
+											value="${user.phoneNumber}" name="phoneNumber">
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default"

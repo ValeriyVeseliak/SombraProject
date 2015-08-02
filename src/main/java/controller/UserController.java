@@ -37,12 +37,12 @@ public class UserController {
 
 	@RequestMapping(value = { "/signup/create" }, method = RequestMethod.POST)
 	public String signUp(Model model, @RequestParam String firstName,
-			@RequestParam String lastName, @RequestParam String email,
+			@RequestParam String lastName, @RequestParam String email, @RequestParam String phoneNumber,
 			@RequestParam String login, @RequestParam String password) {
 		try {
 			UserRole role = UserRole.ROLE_USER;
-			User User = new User(firstName, lastName, email, login, password,
-					role);
+			User User = new User(firstName, lastName, email, login, password, phoneNumber,
+					role, true);
 			userService.add(User);
 		} catch (PersistenceException e) {
 			String error = "A user with the following data already exists";

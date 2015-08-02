@@ -30,7 +30,7 @@ public class GoodServiceImpl implements GoodService {
 		List<GoodDTO> dtos = new ArrayList<>();
 		for (Good good : goodDao.getAll()) {
 			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good
-					.getPrice(), good.getDescription(), good.getCathegory()));
+					.getPrice(), good.getDescription(), good.getIsAvailable(), good.getCathegory()));
 		}
 		return dtos;
 	}
@@ -66,7 +66,7 @@ public class GoodServiceImpl implements GoodService {
 		List<GoodDTO> dtos = new ArrayList<GoodDTO>();
 		for (Good good : goodDao.getGoodByCathegory(cathegory)) {
 			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good
-					.getPrice(), good.getDescription(), good.getCathegory()));
+					.getPrice(), good.getDescription(), good.getIsAvailable(), good.getCathegory()));
 		}
 		return dtos;
 
@@ -89,7 +89,7 @@ public class GoodServiceImpl implements GoodService {
 		List<Good> goods = goodDao.getGoodByCathegoryAndPrice(cathegory, price);
 		for (Good good : goods) {
 			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good
-					.getPrice(), good.getDescription(), good.getCathegory()));
+					.getPrice(), good.getDescription(), good.getIsAvailable(), good.getCathegory()));
 		}
 		return dtos;
 	}
@@ -101,7 +101,7 @@ public class GoodServiceImpl implements GoodService {
 		List<Good> goods = goodDao.searchGoodFromCathegory(keyword, cathegory);
 		for (Good good : goods) {
 			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good
-					.getPrice(), good.getDescription(), good.getCathegory()));
+					.getPrice(), good.getDescription(), good.getIsAvailable(), good.getCathegory()));
 		}
 		return dtos;
 	}
@@ -112,7 +112,7 @@ public class GoodServiceImpl implements GoodService {
 		List<Good> goods = goodDao.searchGoodFromAll(keyword);
 		for (Good good : goods) {
 			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good
-					.getPrice(), good.getDescription(), good.getCathegory()));
+					.getPrice(), good.getDescription(), good.getIsAvailable(), good.getCathegory()));
 		}
 		return dtos;
 	}

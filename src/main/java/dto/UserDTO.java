@@ -7,9 +7,20 @@ public class UserDTO {
 	private String email;
 	private String login;
 	private String password;
-
+	private String phoneNumber;
+	private Boolean isEnabled;
+	
+	
 	public UserDTO(Long id, String firstName, String lastName, String email,
-			String login, String password) {
+			String login, String password, String phoneNumber, Boolean isEnabled) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.login = login;
+		this.password = password;
+		this.phoneNumber = phoneNumber;
+		this.isEnabled = isEnabled;
 	}
 
 	public Long getId() {
@@ -60,4 +71,22 @@ public class UserDTO {
 		this.password = password;
 	}
 
+	public Boolean getIsEnabled() {
+		return isEnabled;
+	}
+
+	public void setIsEnabled(Boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	
+	
 }

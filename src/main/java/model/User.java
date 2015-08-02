@@ -33,6 +33,8 @@ public class User {
 	private String login;
 	@Column(length = 25, nullable = false)
 	private String password;
+	private String phoneNumber;
+	private Boolean isEnabled;
 
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
@@ -51,28 +53,31 @@ public class User {
 	}
 
 	public User(String firstName, String lastName, String email, String login,
-			String password, UserRole role) {
+			String password, String phoneNumber, UserRole role, Boolean isEnabled) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.login = login;
 		this.password = password;
+		this.phoneNumber = phoneNumber;
 		this.role = role;
+		this.isEnabled = isEnabled;
 	}
 
 	public User(Long id, String firstName, String lastName, String email,
-			String login, String password, UserRole role, Basket basket,
+			String login, String password, String phoneNumber, UserRole role, Boolean isEnabled, Basket basket,
 			Set<Custom> customs) {
-		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.login = login;
 		this.password = password;
+		this.phoneNumber = phoneNumber;
 		this.role = role;
 		this.basket = basket;
 		this.customs = customs;
+		this.isEnabled = isEnabled;
 	}
 
 	public UserRole getRole() {
@@ -147,6 +152,22 @@ public class User {
 		this.customs = customs;
 	}
 
+	public Boolean getIsEnabled() {
+		return isEnabled;
+	}
+
+	public void setIsEnabled(Boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -181,6 +202,11 @@ public class User {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (isEnabled == null) {
+			if (other.isEnabled != null)
+				return false;
+		} else if (!isEnabled.equals(other.isEnabled))
+			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
 				return false;
@@ -195,6 +221,11 @@ public class User {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
+			return false;
+		if (phoneNumber == null) {
+			if (other.phoneNumber != null)
+				return false;
+		} else if (!phoneNumber.equals(other.phoneNumber))
 			return false;
 		if (role != other.role)
 			return false;

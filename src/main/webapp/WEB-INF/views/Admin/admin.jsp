@@ -12,7 +12,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 
-<h1 style="text-align:center">Admin profile</h1>
+<h1 style="text-align: center">Admin profile</h1>
 
 
 <div>
@@ -33,6 +33,7 @@
 		<th>Good name</th>
 		<th>Price</th>
 		<th>Description</th>
+		<th>Is available</th>
 		<th>Category</th>
 		<th>Update</th>
 		<th>Delete</th>
@@ -47,16 +48,20 @@
 
 			<td>${good.description}</td>
 
+			<td><c:if test="${good.isAvailable == true}">
+					+
+				</c:if> <c:if test="${good.isAvailable == false}">
+					-
+				</c:if></td>
+
 			<td style="width: 200px">${good.cathegory.cathName}</td>
 
 			<td style="width: 100px">
-			
-			
-			<button type="button"
-					class="btn btn-primary btn-sm" data-toggle="modal"
-					data-target="#${good.id}">Update</button> 
-					<!-- Modal -->
-				
+
+
+				<button type="button" class="btn btn-primary btn-sm"
+					data-toggle="modal" data-target="#${good.id}">Update</button> <!-- Modal -->
+
 				<div class="modal fade" id="${good.id}" tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel">
 					<div class="modal-dialog" role="document">
@@ -86,6 +91,19 @@
 											name="price" value="${good.price}">
 									</div>
 									<div class="form-group">
+										<label for="isAvailable">Available</label>
+										<c:if test="${good.isAvailable == true}">
+											True<input type="radio" name="isAvailable" value="true"
+												checked="checked">
+											False<input type="radio" name="isAvailable" value="false">
+										</c:if>
+										<c:if test="${good.isAvailable == false}">
+											True<input type="radio" name="isAvailable" value="true">
+											False<input type="radio" name="isAvailable" value="false"
+												checked="checked">
+										</c:if>
+									</div>
+									<div class="form-group">
 										<label for="cathName">Category</label> <select name="cathName">
 											<c:forEach items="${cathegories}" var="cathegory">
 												<c:if test="${good.cathegory.cathName==cathegory.cathName}">
@@ -111,7 +129,7 @@
 						</div>
 					</div>
 				</div>
-				</td>
+			</td>
 
 			<td style="width: 200px"><a
 				href="/SombraStore/admin/goods/${good.id}/delete"><input
@@ -148,7 +166,13 @@
 						<textarea name="description"></textarea>
 					</div>
 					<div class="form-group">
-						<label for="price">Price</label> <input type="number" name="price" min="0">
+						<label for="price">Price</label> <input type="number" name="price"
+							min="0">
+					</div>
+					<div class="form-group">
+						<label for="isAvailable">Is available</label> True<input
+							type="radio" name="isAvailable" value="true" checked="checked">
+						False<input type="radio" name="isAvailable" value="false">
 					</div>
 					<div class="form-group">
 						<label for="cathName">Category</label> <select name="cathegories">

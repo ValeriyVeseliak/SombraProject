@@ -35,7 +35,7 @@
 				<div class="thumbnail">
 					<div class="img">
 						<a href="/SombraStore/good/${good.id}"><img
-							src="resources/img/${good.id}.jpg" class="previewimage"></a>
+							src="src/main/webapp/resources/img/${good.id}.jpg" class="previewimage"></a>
 					</div>
 					<div class="caption">
 						<a href="/SombraStore/good/${good.id}"><b>${good.goodName}</b></a>

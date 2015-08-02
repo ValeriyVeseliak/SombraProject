@@ -27,20 +27,30 @@
 		</c:forEach>
 	</div>
 
-	<h2 style="text-align:center">${good.goodName}</h2>
+	<h2 style="text-align: center">${good.goodName}</h2>
 	<div class="row">
 		<div class=".col-md-5">
 			<div class="thumbnail">
-				<img
-					src="resources/img/${good.id}.jpg" class="full-size">
+				<img src="resources/img/${good.id}.jpg" class="full-size">
 				<div class="caption">
 					<b>${good.goodName}</b>
 					<p>Price: ${good.price}</p>
 					<p>Details: ${good.description}</p>
-					<sec:authorize access="hasRole('ROLE_USER')">
-						<a href="/SombraStore/toBasket/${good.id}" class="btn btn-primary"
-							role="button">Add to Basket</a>
-					</sec:authorize>
+					<c:if test="${good.isAvailable == true}">
+						<p style="color:green">AVAILABLE</p>
+						<sec:authorize access="hasRole('ROLE_USER')">
+							<a href="/SombraStore/toBasket/${good.id}"
+								class="btn btn-primary" role="button">Add to Basket</a>
+						</sec:authorize>
+					</c:if>
+					<c:if test="${good.isAvailable == false}">
+						<p style="color:red">NOT AVAILABLE</p>
+						<sec:authorize access="hasRole('ROLE_USER')">
+							<a href="/SombraStore/toBasket/${good.id}"></a>
+								<input type="button" class="btn btn-primary" role="button" value="Add to Basket" disabled="disabled">
+						</sec:authorize>
+					</c:if>
+
 				</div>
 			</div>
 		</div>

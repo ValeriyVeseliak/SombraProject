@@ -7,14 +7,16 @@ public class GoodDTO {
 	private String goodName;
 	private Double price;
 	private String description;
+	private Boolean isAvailable;
 	private Cathegory cathegory;
 
-	public GoodDTO(Long id, String goodName, Double price, String description,
+	public GoodDTO(Long id, String goodName, Double price, String description, Boolean isAvailable,
 			Cathegory cathegory) {
 		this.id = id;
 		this.goodName = goodName;
 		this.price = price;
 		this.description = description;
+		this.isAvailable = isAvailable;
 		this.cathegory = cathegory;
 	}
 
@@ -58,4 +60,13 @@ public class GoodDTO {
 		this.cathegory = cathegory;
 	}
 
+	public Boolean getIsAvailable() {
+		return isAvailable;
+	}
+
+	public void setIsAvailable(Boolean isAvailable) {
+		this.isAvailable = isAvailable;
+	}
+	
+	
 }

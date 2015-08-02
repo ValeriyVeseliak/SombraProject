@@ -41,7 +41,7 @@
 	
     <authentication-provider>
       <user-service>
-        <user name="admin" password="admin" authorities="ROLE_ADMIN" />
+        <user name="admin" password="admin" locked="false" authorities="ROLE_ADMIN" />
       </user-service>
     </authentication-provider>
     

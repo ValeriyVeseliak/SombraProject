@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 		for (User user : userDao.getAll()) {
 			dtos.add(new UserDTO(user.getId(), user.getFirstName(), user
 					.getLastName(), user.getEmail(), user.getLogin(), user
-					.getPassword()));
+					.getPassword(), user.getPhoneNumber(), user.getIsEnabled()));
 		}
 		return dtos;
 	}
@@ -69,11 +69,6 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public User getUserByLoginPassword(String login, String password) {
 		return userDao.getUserByLoginPassword(login, password);
-	}
-
-	@Transactional
-	public List<User> getAllUsers() {
-		return userDao.getAll();
 	}
 
 }
