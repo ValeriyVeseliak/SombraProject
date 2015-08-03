@@ -9,6 +9,7 @@ import model.Cathegory;
 import model.Good;
 import model.User;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,13 +32,10 @@ public class AdminController {
 
 	@Inject
 	UserService userService;
-
 	@Inject
 	CathegoryService cathegoryService;
-
 	@Inject
 	GoodService goodService;
-
 	@Inject
 	CustomService customService;
 
@@ -70,24 +68,26 @@ public class AdminController {
 			@RequestParam String firstName, @RequestParam String lastName,
 			@RequestParam String email, @RequestParam String login,
 			@RequestParam String password, @RequestParam String phoneNumber) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 		User user = userService.getByID(id);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setEmail(email);
 		user.setLogin(login);
-		user.setPassword(password);
+		
+		String pass = encoder.encode(password);
+		user.setPassword(pass);
 		user.setPhoneNumber(phoneNumber);
 		userService.update(user);
 		return "redirect:/admin/users";
 	}
 	
-	@RequestMapping(value="/users/{id}/state", method= RequestMethod.GET)
-	public String changeState(@PathVariable long id){
+	@RequestMapping(value = "/users/{id}/state", method = RequestMethod.GET)
+	public String changeState(@PathVariable long id) {
 		User user = userService.getByID(id);
-		if(user.getIsEnabled()==true){
+		if (user.getIsEnabled() == true) {
 			user.setIsEnabled(false);
-		}
-		else{
+		} else {
 			user.setIsEnabled(true);
 		}
 		userService.update(user);

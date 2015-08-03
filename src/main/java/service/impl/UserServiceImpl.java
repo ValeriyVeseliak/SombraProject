@@ -45,8 +45,8 @@ public class UserServiceImpl implements UserService {
 	public void add(User user) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 		String pass = encoder.encode(user.getPassword());
-		User user2 = new User(user.getFirstName(), user.getLastName(), user.getEmail(), user.getLogin(), pass, user.getPhoneNumber(), user.getRole(), user.getIsEnabled());
-		userDao.add(user2);
+		User u = new User(user.getFirstName(), user.getLastName(), user.getEmail(), user.getLogin(), pass, user.getPhoneNumber(), user.getRole(), user.getIsEnabled());
+		userDao.add(u);
 	}
 
 	@Transactional

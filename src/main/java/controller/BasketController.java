@@ -45,7 +45,7 @@ public class BasketController {
 	public String getAllGoodInBasket(Model model, Principal principal) {
 		try {
 			User user = userService.getUserByLogin(principal.getName());
-			Basket basket = basketService.getBasketByUser(user);
+			Basket basket = user.getBasket();
 			List<CathegoryDTO> cathegories = cathegoryService.getAll();
 			Double sumPrice = (double) 0;
 			Set<Good> goods = basket.getGoods();
@@ -70,9 +70,8 @@ public class BasketController {
 			Principal principal) {
 		Good good = goodService.getByID(id);
 		User user = userService.getUserByLogin(principal.getName());
-		Basket basket = basketService.getBasketByUser(user);
+		Basket basket = user.getBasket();
 		Set<Good> goods = basket.getGoods();
-
 		Iterator<Good> g = goods.iterator();
 		while (g.hasNext()) {
 			if (g.next().equals(good)) {
@@ -87,7 +86,7 @@ public class BasketController {
 	@RequestMapping(value = "/makeOrder", method = RequestMethod.GET)
 	public String makeAnOrder(Principal principal, Model model) {
 		User user = userService.getUserByLogin(principal.getName());
-		Basket basket = basketService.getBasketByUser(user);
+		Basket basket = user.getBasket();
 		List<CathegoryDTO> cathegories = cathegoryService.getAll();
 		Set<Good> goods = basket.getGoods();
 		double priceOfOrder = 0;

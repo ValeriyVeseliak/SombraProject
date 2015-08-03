@@ -37,7 +37,7 @@
 		<div class="row">
 			<div class=".col-sm-6">
 				<div class="thumbnail">
-					<img src="resources/img/${good.id}.jpg" class="previewimage">
+					<img src="http://localhost:8080/SombraStore/resources/img/${good.id}.jpg" class="previewimage">
 					<div class="caption">
 						<h3>${good.goodName}</h3>
 						<p>Price: ${good.price}</p>

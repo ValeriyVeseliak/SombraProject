@@ -32,13 +32,10 @@ public class GoodController {
 
 	@Inject
 	UserService userService;
-
 	@Inject
 	GoodService goodService;
-
 	@Inject
 	CathegoryService cathegoryService;
-
 	@Inject
 	BasketService basketService;
 

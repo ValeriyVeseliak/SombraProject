@@ -73,11 +73,11 @@
 
 								<form action="/SombraStore/admin/users/${user.id}/update">
 									<div class="form-group">
-										<label for="firstName">Name</label> <input type="text"
+										<label for="firstName">First name</label> <input type="text"
 											name="firstName" value="${user.firstName}">
 									</div>
 									<div class="form-group">
-										<label for="lastName">Name</label> <input type="text"
+										<label for="lastName">Last name</label> <input type="text"
 											name="lastName" value="${user.lastName}">
 									</div>
 									<div class="form-group">
