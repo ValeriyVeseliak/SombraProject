@@ -32,7 +32,6 @@
 		<th>Email</th>
 		<th>Phone</th>
 		<th>Login</th>
-		<th>Password</th>
 		<th>State</th>
 		<th>Update</th>
 		<th>Delete</th>
@@ -40,11 +39,10 @@
 	<c:forEach items="${users}" var="user">
 		<tr>
 			<td>${user.id}</td>
-			<td>${user.firstName}${user.lastName}</td>
+			<td>${user.firstName} ${user.lastName}</td>
 			<td>${user.email}</td>
 			<td>${user.phoneNumber}</td>
 			<td>${user.login}</td>
-			<td>${user.password}</td>
 			<td><a href="/SombraStore/admin/users/${user.id}/state"> <c:if
 						test="${user.isEnabled == true}">
 						<input type="button" value="Ban">
@@ -90,7 +88,7 @@
 									</div>
 									<div class="form-group">
 										<label for="password">Password</label> <input type="text"
-											value="${user.password}" name="password">
+											 name="password">
 									</div>
 									<div class="form-group">
 										<label for="phoneNumber">Phone number</label> <input
