@@ -72,57 +72,9 @@
 		</div>
 	</sec:authorize>
 	
-
-
-
 	<sec:authorize access="isAuthenticated()">
 		<a href="<c:url value="/j_spring_security_logout"/>">Log Out</a>
 	</sec:authorize>
 
-	<script src="/wp-content/themes/clear-theme/js/jquery.js"></script>
-	<script src="/wp-content/themes/clear-theme/js/bootstrap-transition.js"></script>
-	<script src="/wp-content/themes/clear-theme/js/bootstrap-alert.js"></script>
-	<script src="/wp-content/themes/clear-theme/js/bootstrap-modal.js"></script>
-	<script src="/wp-content/themes/clear-theme/js/bootstrap-dropdown.js"></script>
-	<script src="/wp-content/themes/clear-theme/js/bootstrap-scrollspy.js"></script>
-	<script src="/wp-content/themes/clear-theme/js/bootstrap-tab.js"></script>
-	<script src="/wp-content/themes/clear-theme/js/bootstrap-tooltip.js"></script>
-	<script src="/wp-content/themes/clear-theme/js/bootstrap-popover.js"></script>
-	<script src="/wp-content/themes/clear-theme/js/bootstrap-button.js"></script>
-	<script src="/wp-content/themes/clear-theme/js/bootstrap-collapse.js"></script>
-	<script src="/wp-content/themes/clear-theme/js/bootstrap-carousel.js"></script>
-	<script src="/wp-content/themes/clear-theme/js/bootstrap-typeahead.js"></script>
-	
-	
-	
-<!-- <script>
-
-var testresults
-function checkemail(){
-var str=document.email_pass.j_username.value
-var filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
-if (filter.test(str)){
-testresults=true
-document.getElementById("vform").className= "form-group"
-}
-else{
-document.getElementById("div_error").innerText="Please input a valid email address!"
-document.getElementById("div_error").style.color="red"
-document.getElementById("vform").className= "form-group has-error"
-testresults=false
-}
-return (testresults)
-}
-</script>
-
-<script>
-function checkbae(){
-if (document.layers||document.getElementById||document.all)
-return checkemail()
-else
-return true
-}
-</script>
- -->
 </body>
 </html>

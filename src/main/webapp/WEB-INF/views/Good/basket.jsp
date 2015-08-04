@@ -29,10 +29,6 @@
 
 
 	<h1>Basket</h1>
-
-
-
-
 	<c:forEach items="${goods}" var="good">
 		<div class="row">
 			<div class=".col-sm-6">

@@ -42,10 +42,6 @@
 						<a href="/SombraStore/good/${good.id}"><b>${good.goodName}</b></a>
 						<p>Price: ${good.price}</p>
 						<p>Details: ${good.description}</p>
-						<%-- <sec:authorize access="hasRole('ROLE_USER')">
-							<a href="/SombraStore/toBasket/${good.id}"
-								class="btn btn-primary" role="button">Add to Basket</a>
-						</sec:authorize> --%>
 					</div>
 				</div>
 			</div>

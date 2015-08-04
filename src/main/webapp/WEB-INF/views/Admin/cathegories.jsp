@@ -61,7 +61,7 @@
 			<div class="modal-body">
 				<form action="/SombraStore/admin/cathegories/create">
 					<div class="form-group">
-						<label for="cathName"> Name of category</label> <input type="text"
+						<label for="cathName"> Name of category</label> <input type="text" pattern=".{3,}" title="3 characters minimum" required
 							name="cathName">
 					</div>
 					<div class="modal-footer">

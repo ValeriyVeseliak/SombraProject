@@ -7,7 +7,6 @@
 <head></head>
 <body>
 
-
 	<div class="search">
 		<form action="/SombraStore/search">
 			<input type="text" name="keyword" value="${keyword}"> <select
@@ -17,7 +16,10 @@
 					<c:if test="${cathName == cathegory.cathName}">
 						<option value="${cathegory.cathName}" selected="selected">${cathegory.cathName}</option>
 					</c:if>
-					<option value="${cathegory.cathName}">${cathegory.cathName}</option>
+					<c:if test="${cathName != cathegory.cathName}">
+						<option value="${cathegory.cathName}">${cathegory.cathName}</option>
+					</c:if>
+					
 				</c:forEach>
 			</select> <input type="submit" value="Search" class="btn btn-default">
 		</form>
@@ -46,10 +48,6 @@
 						<a href="/SombraStore/good/${good.id}"><b>${good.goodName}</b></a>
 						<p>Price: ${good.price}</p>
 						<p>Details: ${good.description}</p>
-						<%-- <sec:authorize access="hasRole('ROLE_USER')">
-							<a href="/SombraStore/toBasket/${good.id}"
-								class="btn btn-primary" role="button">Add to Basket</a>
-						</sec:authorize> --%>
 					</div>
 				</div>
 			</div>

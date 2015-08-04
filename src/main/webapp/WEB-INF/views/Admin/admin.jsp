@@ -80,7 +80,7 @@
 								<form action="/SombraStore/admin/goods/${good.id}/update">
 									<div class="form-group">
 										<label for="goodName"> Name of good</label> <input type="text"
-											name="goodName" value="${good.goodName}">
+											pattern=".{3,}" title="3 characters minimum" name="goodName" value="${good.goodName}" required>
 									</div>
 									<div class="form-group">
 										<label for="decription"> Description</label> <input
@@ -88,7 +88,7 @@
 									</div>
 									<div class="form-group">
 										<label for="price">Price</label> <input type="number" min="0"
-											name="price" value="${good.price}">
+											name="price" value="${good.price}" required>
 									</div>
 									<div class="form-group">
 										<label for="isAvailable">Available</label>
@@ -159,7 +159,7 @@
 				<form action="/SombraStore/admin/goods/create">
 					<div class="form-group">
 						<label for="goodName"> Name of good</label> <input type="text"
-							name="goodName">
+							pattern=".{3,}" title="3 characters minimum" name="goodName" required>
 					</div>
 					<div class="form-group">
 						<label for="decription"> Description</label>
@@ -167,7 +167,7 @@
 					</div>
 					<div class="form-group">
 						<label for="price">Price</label> <input type="number" name="price"
-							min="0">
+							min="0" required>
 					</div>
 					<div class="form-group">
 						<label for="isAvailable">Is available</label> True<input

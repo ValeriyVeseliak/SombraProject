@@ -39,7 +39,7 @@
 	<c:forEach items="${users}" var="user">
 		<tr>
 			<td>${user.id}</td>
-			<td>${user.firstName} ${user.lastName}</td>
+			<td>${user.firstName}${user.lastName}</td>
 			<td>${user.email}</td>
 			<td>${user.phoneNumber}</td>
 			<td>${user.login}</td>
@@ -72,27 +72,32 @@
 								<form action="/SombraStore/admin/users/${user.id}/update">
 									<div class="form-group">
 										<label for="firstName">First name</label> <input type="text"
-											name="firstName" value="${user.firstName}">
+											name="firstName" pattern=".{3,}" title="3 characters minimum"
+											value="${user.firstName}" required>
 									</div>
 									<div class="form-group">
 										<label for="lastName">Last name</label> <input type="text"
-											name="lastName" value="${user.lastName}">
+											name="lastName" pattern=".{3,}" title="3 characters minimum"
+											value="${user.lastName}" required>
 									</div>
 									<div class="form-group">
-										<label for="email">Email</label> <input type="text"
-											name="email" value="${user.email}">
+										<label for="email">Email</label> <input type="email"
+											name="email" title="Input valid email" value="${user.email}" required>
 									</div>
 									<div class="form-group">
 										<label for="login">Login</label> <input type="text"
-											name="login" value="${user.login}">
+											name="login" value="${user.login}" required>
 									</div>
 									<div class="form-group">
 										<label for="password">Password</label> <input type="text"
-											 name="password">
+											title="8 characters minimum" pattern=".{8,}" name="password" required>
 									</div>
 									<div class="form-group">
 										<label for="phoneNumber">Phone number</label> <input
-											type="text" value="${user.phoneNumber}" name="phoneNumber">
+											type="text"
+											pattern="[\+]\d{2}[\(]?\d{3}[\)]?\d{2}[\-]?\d{2}[\-]?\d{3}"
+											title="Input valid phone" value="${user.phoneNumber}"
+											name="phoneNumber" required>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default"

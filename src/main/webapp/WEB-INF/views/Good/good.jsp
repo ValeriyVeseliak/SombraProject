@@ -7,7 +7,6 @@
 <head></head>
 <body>
 
-
 	<div class="search">
 		<form action="/SombraStore/search/">
 			<input type="text" name="keyword"> <select name="cathName">

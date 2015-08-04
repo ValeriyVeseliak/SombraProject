@@ -71,30 +71,6 @@
 	</c:if>
 
 
-
-
-	<%-- <select>
-	<option value="5">9</option>
-	<option value="10">10</option>
-	<option value="25">25</option>
-</select>
- --%>
-
-	<%-- 
-<div class="row">
-	<div class="col-md-4">
-		<label for=price>Price</label> <input type=range min=0
-			max="${maxPrice}" value="${maxPrice}" id=price
-			oninput="outputUpdate(value)" step=10>
-		<output for=price id=newPrice>${maxPrice}</output>
-	</div>
-</div>
- --%>
-	<!-- <script>
-		function outputUpdate(vol) {
-			document.querySelector('#newPrice').value = vol;
-		}
-	</script> -->
 	<script type="text/javascript"
 		src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
