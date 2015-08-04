@@ -30,7 +30,8 @@ public class GoodServiceImpl implements GoodService {
 		List<GoodDTO> dtos = new ArrayList<>();
 		for (Good good : goodDao.getAll()) {
 			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good
-					.getPrice(), good.getDescription(), good.getIsAvailable(), good.getCathegory()));
+					.getPrice(), good.getDescription(), good.getIsAvailable(),
+					good.getCathegory()));
 		}
 		return dtos;
 	}
@@ -43,7 +44,6 @@ public class GoodServiceImpl implements GoodService {
 		} else {
 			return new Good();
 		}
-
 	}
 
 	@Transactional
@@ -66,32 +66,16 @@ public class GoodServiceImpl implements GoodService {
 		List<GoodDTO> dtos = new ArrayList<GoodDTO>();
 		for (Good good : goodDao.getGoodByCathegory(cathegory)) {
 			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good
-					.getPrice(), good.getDescription(), good.getIsAvailable(), good.getCathegory()));
+					.getPrice(), good.getDescription(), good.getIsAvailable(),
+					good.getCathegory()));
 		}
 		return dtos;
 
-	}
-
-	@Transactional
-	public Good getGoodByPrice(Double price) {
-		return goodDao.getGoodByPrice(price);
 	}
 
 	@Transactional
 	public Double getMaxPrice() {
 		return goodDao.getMaxPrice();
-	}
-
-	@Transactional
-	public List<GoodDTO> getGoodByCathegoryAndPrice(Cathegory cathegory,
-			Double price) {
-		List<GoodDTO> dtos = new ArrayList<GoodDTO>();
-		List<Good> goods = goodDao.getGoodByCathegoryAndPrice(cathegory, price);
-		for (Good good : goods) {
-			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good
-					.getPrice(), good.getDescription(), good.getIsAvailable(), good.getCathegory()));
-		}
-		return dtos;
 	}
 
 	@Transactional
@@ -101,7 +85,8 @@ public class GoodServiceImpl implements GoodService {
 		List<Good> goods = goodDao.searchGoodFromCathegory(keyword, cathegory);
 		for (Good good : goods) {
 			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good
-					.getPrice(), good.getDescription(), good.getIsAvailable(), good.getCathegory()));
+					.getPrice(), good.getDescription(), good.getIsAvailable(),
+					good.getCathegory()));
 		}
 		return dtos;
 	}
@@ -112,7 +97,8 @@ public class GoodServiceImpl implements GoodService {
 		List<Good> goods = goodDao.searchGoodFromAll(keyword);
 		for (Good good : goods) {
 			dtos.add(new GoodDTO(good.getId(), good.getGoodName(), good
-					.getPrice(), good.getDescription(), good.getIsAvailable(), good.getCathegory()));
+					.getPrice(), good.getDescription(), good.getIsAvailable(),
+					good.getCathegory()));
 		}
 		return dtos;
 	}

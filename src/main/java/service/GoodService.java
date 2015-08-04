@@ -20,11 +20,7 @@ public interface GoodService {
 	
 	public List<GoodDTO> getGoodByCathegory(Cathegory cathegory);
 	
-	public Good getGoodByPrice(Double price);
-	
 	public Double getMaxPrice();
-	
-	public List<GoodDTO> getGoodByCathegoryAndPrice(Cathegory cathegory, Double price);
 	
 	public List<GoodDTO> searchGoodFromCathegory(String keyword, Cathegory cathegory);
 	

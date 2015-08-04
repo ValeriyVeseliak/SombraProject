@@ -66,8 +66,6 @@ public class GoodController {
 		model.addAttribute("goods", dispayedGoods);
 		model.addAttribute("maxPage", maxPage);
 		model.addAttribute("page", page);
-		// model.addAttribute("maxPrice", goodService.getMaxPrice());
-		// model.addAttribute("goods", goods);
 		List<CathegoryDTO> cathegories = cathegoryService.getAll();
 		model.addAttribute("cathegories", cathegories);
 		return "all";
@@ -91,7 +89,8 @@ public class GoodController {
 
 		int countOnPage = 10;
 		int maxPage = (int) Math.ceil((double) goodsCath.size() / countOnPage);
-		if(maxPage==0)maxPage=1;
+		if (maxPage == 0)
+			maxPage = 1;
 		if (page < 1) {
 			page = 1;
 		} else if (page > maxPage) {
@@ -143,6 +142,7 @@ public class GoodController {
 		if (cathName.equals("ALL")) {
 			List<GoodDTO> goods = goodService.searchGoodFromAll(keyword);
 			/*
+			 * Pagination
 			 * int countOnPage = 10; int maxPage = (int) Math.ceil((double)
 			 * goods.size() / countOnPage); if (page < 1) { page = 1; } else if
 			 * (page > maxPage) { page = maxPage; } List<GoodDTO> dispayedGoods
@@ -157,6 +157,7 @@ public class GoodController {
 			List<GoodDTO> goods = goodService.searchGoodFromCathegory(keyword,
 					cathegory);
 			/*
+			 * Pagination
 			 * int countOnPage = 10; int maxPage = (int) Math.ceil((double)
 			 * goods.size() / countOnPage); if (page < 1) { page = 1; } else if
 			 * (page > maxPage) { page = maxPage; } List<GoodDTO> dispayedGoods

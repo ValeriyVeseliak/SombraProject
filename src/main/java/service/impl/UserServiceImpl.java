@@ -22,11 +22,6 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	@Transactional
-	public User getUserByFirstLastName(String firstName, String lastName) {
-		return userDao.getUserByFirstLastName(firstName, lastName);
-	}
-
-	@Transactional
 	public User getUserByLogin(String login) {
 		return userDao.getUserByLogin(login);
 	}
@@ -45,7 +40,9 @@ public class UserServiceImpl implements UserService {
 	public void add(User user) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 		String pass = encoder.encode(user.getPassword());
-		User u = new User(user.getFirstName(), user.getLastName(), user.getEmail(), user.getLogin(), pass, user.getPhoneNumber(), user.getRole(), user.getIsEnabled());
+		User u = new User(user.getFirstName(), user.getLastName(),
+				user.getEmail(), user.getLogin(), pass, user.getPhoneNumber(),
+				user.getRole(), user.getIsEnabled());
 		userDao.add(u);
 	}
 
@@ -68,11 +65,6 @@ public class UserServiceImpl implements UserService {
 					.getPassword(), user.getPhoneNumber(), user.getIsEnabled()));
 		}
 		return dtos;
-	}
-
-	@Transactional
-	public User getUserByLoginPassword(String login, String password) {
-		return userDao.getUserByLoginPassword(login, password);
 	}
 
 }

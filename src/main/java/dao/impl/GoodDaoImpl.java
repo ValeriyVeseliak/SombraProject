@@ -32,35 +32,10 @@ public class GoodDaoImpl extends BaseDaoImpl<Good> implements GoodDao {
 	}
 
 	@Transactional
-	public Good getGoodByPrice(Double price) {
-		try {
-			return (Good) entityManager
-					.createNamedQuery(Good.GET_GOOD_BY_PRICE)
-					.setParameter("price", price).getSingleResult();
-		} catch (NoResultException e) {
-			return null;
-		}
-	}
-
-	@Transactional
 	public Double getMaxPrice() {
 		try {
 			return (Double) entityManager.createNativeQuery(
 					"Select Max(price) from Good").getSingleResult();
-		} catch (NoResultException e) {
-			return null;
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public List<Good> getGoodByCathegoryAndPrice(Cathegory cathegory,
-			Double price) {
-		try {
-			return (List<Good>) entityManager
-					.createNamedQuery(Good.GET_GOOD_BY_CATHEGORY_AND_PRICE)
-					.setParameter("cathegory", cathegory)
-					.setParameter("price", price).getResultList();
 		} catch (NoResultException e) {
 			return null;
 		}

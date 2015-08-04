@@ -18,10 +18,6 @@ public interface UserService {
 
 	public void delete(User user);
 	
-	public User getUserByLoginPassword(String login, String password);
-	
-	public User getUserByFirstLastName(String firstName, String lastName);
-	
 	public User getUserByLogin(String login);
 
 }

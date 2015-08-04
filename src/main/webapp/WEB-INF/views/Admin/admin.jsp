@@ -11,10 +11,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
-
 <h1 style="text-align: center">Admin profile</h1>
-
-
 <div>
 	<ul class="nav nav-tabs">
 		<li role="presentation" class="active"><a
