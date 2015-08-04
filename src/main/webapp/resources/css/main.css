@@ -88,3 +88,7 @@ img.full-size{
 	width:250px;
 	float:left;
 }
+.temp-page{
+	text-decoration: underline;
+	color:red;
+}

@@ -1,6 +1,7 @@
 package controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,11 +40,34 @@ public class GoodController {
 	@Inject
 	BasketService basketService;
 
-	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
-	public String AllGoods(Model model) {
-		model.addAttribute("maxPrice", goodService.getMaxPrice());
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String Main() {
+		return "redirect:/1";
+	}
+
+	@RequestMapping(value = { "/{page}" }, method = RequestMethod.GET)
+	public String AllGoods(Model model, @PathVariable int page) {
 		List<GoodDTO> goods = goodService.getAll();
-		model.addAttribute("goods", goods);
+		int countOnPage = 10;
+		int maxPage = (int) Math.ceil((double) goods.size() / countOnPage);
+		if (page < 1) {
+			page = 1;
+		} else if (page > maxPage) {
+			page = maxPage;
+		}
+		List<GoodDTO> dispayedGoods = new ArrayList<GoodDTO>();
+		try {
+			for (int i = page * countOnPage - countOnPage; i < page
+					* countOnPage; i++) {
+				dispayedGoods.add(goods.get(i));
+			}
+		} catch (IndexOutOfBoundsException e) {
+		}
+		model.addAttribute("goods", dispayedGoods);
+		model.addAttribute("maxPage", maxPage);
+		model.addAttribute("page", page);
+		// model.addAttribute("maxPrice", goodService.getMaxPrice());
+		// model.addAttribute("goods", goods);
 		List<CathegoryDTO> cathegories = cathegoryService.getAll();
 		model.addAttribute("cathegories", cathegories);
 		return "all";
@@ -59,12 +83,31 @@ public class GoodController {
 		return "good";
 	}
 
-	@RequestMapping(value = "/goods/{cathName}", method = RequestMethod.GET)
-	public String AllGoodsOfCathegory(@PathVariable String cathName, Model model) {
+	@RequestMapping(value = "/goods/{cathName}/{page}", method = RequestMethod.GET)
+	public String AllGoodsOfCathegory(@PathVariable String cathName,
+			@PathVariable int page, Model model) {
 		Cathegory cathegory = cathegoryService.getCathegoryByName(cathName);
 		List<GoodDTO> goodsCath = goodService.getGoodByCathegory(cathegory);
-		model.addAttribute("goods", goodsCath);
+
+		int countOnPage = 10;
+		int maxPage = (int) Math.ceil((double) goodsCath.size() / countOnPage);
+		if(maxPage==0)maxPage=1;
+		if (page < 1) {
+			page = 1;
+		} else if (page > maxPage) {
+			page = maxPage;
+		}
+		List<GoodDTO> dispayedGoods = new ArrayList<GoodDTO>();
+		try {
+			for (int i = page * countOnPage - countOnPage; i < page
+					* countOnPage; i++) {
+				dispayedGoods.add(goodsCath.get(i));
+			}
+		} catch (IndexOutOfBoundsException e) {
+		}
+		model.addAttribute("goods", dispayedGoods);
 		List<CathegoryDTO> cathegories = cathegoryService.getAll();
+		model.addAttribute("maxPage", maxPage);
 		model.addAttribute("cathegories", cathegories);
 		model.addAttribute("cathegory", cathegory);
 		return "allCathGoods";
@@ -99,16 +142,33 @@ public class GoodController {
 		model.addAttribute("cathegories", cathegories);
 		if (cathName.equals("ALL")) {
 			List<GoodDTO> goods = goodService.searchGoodFromAll(keyword);
+			/*
+			 * int countOnPage = 10; int maxPage = (int) Math.ceil((double)
+			 * goods.size() / countOnPage); if (page < 1) { page = 1; } else if
+			 * (page > maxPage) { page = maxPage; } List<GoodDTO> dispayedGoods
+			 * = new ArrayList<GoodDTO>(); try { for (int i = page * countOnPage
+			 * - countOnPage; i < page countOnPage; i++) {
+			 * dispayedGoods.add(goods.get(i)); } } catch
+			 * (IndexOutOfBoundsException e) { }
+			 */
 			model.addAttribute("goods", goods);
 		} else {
 			Cathegory cathegory = cathegoryService.getCathegoryByName(cathName);
 			List<GoodDTO> goods = goodService.searchGoodFromCathegory(keyword,
 					cathegory);
+			/*
+			 * int countOnPage = 10; int maxPage = (int) Math.ceil((double)
+			 * goods.size() / countOnPage); if (page < 1) { page = 1; } else if
+			 * (page > maxPage) { page = maxPage; } List<GoodDTO> dispayedGoods
+			 * = new ArrayList<GoodDTO>(); try { for (int i = page * countOnPage
+			 * - countOnPage; i < page countOnPage; i++) {
+			 * dispayedGoods.add(goods.get(i)); } } catch
+			 * (IndexOutOfBoundsException e) { }
+			 */
 			model.addAttribute("goods", goods);
 		}
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("cathName", cathName);
 		return "searchedGoods";
 	}
-
 }

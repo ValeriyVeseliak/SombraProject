@@ -134,20 +134,10 @@ public class Good {
 		if (getClass() != obj.getClass())
 			return false;
 		Good other = (Good) obj;
-		if (basket == null) {
-			if (other.basket != null)
-				return false;
-		} else if (!basket.equals(other.basket))
-			return false;
 		if (cathegory == null) {
 			if (other.cathegory != null)
 				return false;
 		} else if (!cathegory.equals(other.cathegory))
-			return false;
-		if (customs == null) {
-			if (other.customs != null)
-				return false;
-		} else if (!customs.equals(other.customs))
 			return false;
 		if (description == null) {
 			if (other.description != null)
@@ -177,6 +167,6 @@ public class Good {
 		return true;
 	}
 
-	
+
 
 }

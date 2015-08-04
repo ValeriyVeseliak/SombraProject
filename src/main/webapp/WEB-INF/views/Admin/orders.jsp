@@ -37,14 +37,14 @@
 	<c:forEach items="${orders}" var="order">
 		<tr>
 			<td>${order.id}</td>
-			<td style="width: 200px">${order.user.firstName} ${order.user.lastName}</td>
+			<td style="width: 200px">${order.user.firstName} ${order.user.lastName}  </br> <b>Phone:</b>   ${order.user.phoneNumber}</td>
 
 			<td>
 				<c:forEach items="${order.goods}" var="good">
-					<p>${good.goodName}</p>
+					<p><a href="/SombraStore/good/${good.id}">${good.goodName}</a></p>
 				</c:forEach>
 			</td>
-			<td><fmt:formatDate pattern="dd-MM-yyyy HH:mm"
+			<td><fmt:formatDate pattern="HH:mm   dd-MM-yyyy"
 					value="${order.date}" /></td>
 			<td>${order.priceOfOrder}</td>
 		</tr>

@@ -9,10 +9,14 @@
 
 
 	<div class="search">
-		<form action="/SombraStore/search/">
-			<input type="text" name="keyword"> <select name="cathName">
+		<form action="/SombraStore/search">
+			<input type="text" name="keyword" value="${keyword}"> <select
+				name="cathName">
 				<option value="ALL">All categories</option>
 				<c:forEach items="${cathegories}" var="cathegory">
+					<c:if test="${cathName == cathegory.cathName}">
+						<option value="${cathegory.cathName}" selected="selected">${cathegory.cathName}</option>
+					</c:if>
 					<option value="${cathegory.cathName}">${cathegory.cathName}</option>
 				</c:forEach>
 			</select> <input type="submit" value="Search" class="btn btn-default">
@@ -22,7 +26,7 @@
 	<div class="categories">
 		<c:forEach items="${cathegories}" var="cathegory">
 			<div class="catlinks">
-				<a href="/SombraStore/goods/${cathegory.cathName}/">${cathegory.cathName}</a>
+				<a href="/SombraStore/goods/${cathegory.cathName}/1">${cathegory.cathName}</a>
 			</div>
 		</c:forEach>
 	</div>
@@ -35,7 +39,8 @@
 				<div class="thumbnail">
 					<div class="img">
 						<a href="/SombraStore/good/${good.id}"><img
-							src="http://localhost:8080/SombraStore/resources/img/${good.id}.jpg" class="previewimage"></a>
+							src="http://localhost:8080/SombraStore/resources/img/${good.id}.jpg"
+							class="previewimage"></a>
 					</div>
 					<div class="caption">
 						<a href="/SombraStore/good/${good.id}"><b>${good.goodName}</b></a>
@@ -50,6 +55,9 @@
 			</div>
 		</div>
 	</c:forEach>
+
+
+
 
 </body>
 </html>
