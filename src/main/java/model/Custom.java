@@ -2,6 +2,7 @@ package model;
 
 import java.util.Date;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +14,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
-import javax.persistence.OneToOne;
 
 //Замовлення
 @Entity
@@ -33,9 +33,6 @@ public class Custom {
 	@JoinTable(name = "CustomGood", joinColumns = { @JoinColumn(name = "customId", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "goodId", nullable = false) })
 	private Set<Good> goods;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
-	private Basket basket;
-
 	private Date timeOfCustom;
 
 	private double priceOfOrder;
@@ -48,11 +45,10 @@ public class Custom {
 		this.goods = goods;
 	}
 
-	public Custom(User user, Set<Good> goods, Basket basket, Date timeOfCustom,
+	public Custom(User user, Set<Good> goods, Date timeOfCustom,
 			double priceOfOrder) {
 		this.user = user;
 		this.goods = goods;
-		this.basket = basket;
 		this.timeOfCustom = timeOfCustom;
 		this.priceOfOrder = priceOfOrder;
 	}
@@ -89,14 +85,6 @@ public class Custom {
 		this.goods = goods;
 	}
 
-	public Basket getBasket() {
-		return basket;
-	}
-
-	public void setBasket(Basket basket) {
-		this.basket = basket;
-	}
-
 	public double getPriceOfOrder() {
 		return priceOfOrder;
 	}
@@ -114,11 +102,6 @@ public class Custom {
 		if (getClass() != obj.getClass())
 			return false;
 		Custom other = (Custom) obj;
-		if (basket == null) {
-			if (other.basket != null)
-				return false;
-		} else if (!basket.equals(other.basket))
-			return false;
 		if (goods == null) {
 			if (other.goods != null)
 				return false;

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import service.CustomService;
-import dao.BasketDao;
 import dao.CustomDao;
 import dao.UserDao;
 import dto.CustomDTO;
@@ -21,9 +20,6 @@ public class CustomServiceImpl implements CustomService {
 
 	@Inject
 	CustomDao customDao;
-
-	@Inject
-	BasketDao basketDao;
 
 	@Inject
 	UserDao userDao;

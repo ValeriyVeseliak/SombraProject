@@ -45,11 +45,8 @@
 		</div>
 	</c:forEach>
 
-	<c:if test="${countOfGoods!=true}">
+	<c:if test="${!isEmpty}">
 		<p>Price of all goods is ${sumPrice}</p>
-	</c:if>
-
-	<c:if test="${countOfGoods!=true}">
 		<a href="/SombraStore/basket/makeOrder" class="btn btn-primary"
 			role="button">Make an Order</a>
 	</c:if>

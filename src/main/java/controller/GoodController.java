@@ -1,6 +1,5 @@
 package controller;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -8,11 +7,10 @@ import java.util.Set;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import model.Basket;
 import model.Cathegory;
 import model.Good;
-import model.User;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import service.BasketService;
 import service.CathegoryService;
 import service.GoodService;
 import service.UserService;
@@ -37,8 +34,6 @@ public class GoodController {
 	GoodService goodService;
 	@Inject
 	CathegoryService cathegoryService;
-	@Inject
-	BasketService basketService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String Main() {
@@ -112,23 +107,21 @@ public class GoodController {
 		return "allCathGoods";
 	}
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/toBasket/{id}", method = RequestMethod.GET)
-	public String addGoodToBasket(@PathVariable long id, Principal principal) {
-		User user = userService.getUserByLogin(principal.getName());
+	public String addGoodToBasket(@PathVariable long id,
+			HttpSession session) {
 		Good good = goodService.getByID(id);
-		Basket b = basketService.getBasketByUser(userService
-				.getUserByLogin(principal.getName()));
-
-		if (b == null) {
-			Set<Good> goods = new HashSet<Good>();
-			goods.add(good);
-			Basket basket = new Basket(user, goods);
-			basketService.add(basket);
+		Set<Good> shoppingCart = (Set<Good>) session
+				.getAttribute("goodsList");
+		session.setMaxInactiveInterval(60 * 60 * 3);
+		if (shoppingCart == null) {
+			shoppingCart = new HashSet<Good>();
+			shoppingCart.add(good);
+			session.setAttribute("goodsList", shoppingCart);
 		} else {
-			Set<Good> goods = b.getGoods();
-			goods.add(good);
-			b.setGoods(goods);
-			basketService.update(b);
+			shoppingCart.add(good);
+			session.setAttribute("goodsList", shoppingCart);
 		}
 		return "redirect:/basket";
 	}
@@ -142,13 +135,12 @@ public class GoodController {
 		if (cathName.equals("ALL")) {
 			List<GoodDTO> goods = goodService.searchGoodFromAll(keyword);
 			/*
-			 * Pagination
-			 * int countOnPage = 10; int maxPage = (int) Math.ceil((double)
-			 * goods.size() / countOnPage); if (page < 1) { page = 1; } else if
-			 * (page > maxPage) { page = maxPage; } List<GoodDTO> dispayedGoods
-			 * = new ArrayList<GoodDTO>(); try { for (int i = page * countOnPage
-			 * - countOnPage; i < page countOnPage; i++) {
-			 * dispayedGoods.add(goods.get(i)); } } catch
+			 * Pagination int countOnPage = 10; int maxPage = (int)
+			 * Math.ceil((double) goods.size() / countOnPage); if (page < 1) {
+			 * page = 1; } else if (page > maxPage) { page = maxPage; }
+			 * List<GoodDTO> dispayedGoods = new ArrayList<GoodDTO>(); try { for
+			 * (int i = page * countOnPage - countOnPage; i < page countOnPage;
+			 * i++) { dispayedGoods.add(goods.get(i)); } } catch
 			 * (IndexOutOfBoundsException e) { }
 			 */
 			model.addAttribute("goods", goods);
@@ -157,13 +149,12 @@ public class GoodController {
 			List<GoodDTO> goods = goodService.searchGoodFromCathegory(keyword,
 					cathegory);
 			/*
-			 * Pagination
-			 * int countOnPage = 10; int maxPage = (int) Math.ceil((double)
-			 * goods.size() / countOnPage); if (page < 1) { page = 1; } else if
-			 * (page > maxPage) { page = maxPage; } List<GoodDTO> dispayedGoods
-			 * = new ArrayList<GoodDTO>(); try { for (int i = page * countOnPage
-			 * - countOnPage; i < page countOnPage; i++) {
-			 * dispayedGoods.add(goods.get(i)); } } catch
+			 * Pagination int countOnPage = 10; int maxPage = (int)
+			 * Math.ceil((double) goods.size() / countOnPage); if (page < 1) {
+			 * page = 1; } else if (page > maxPage) { page = maxPage; }
+			 * List<GoodDTO> dispayedGoods = new ArrayList<GoodDTO>(); try { for
+			 * (int i = page * countOnPage - countOnPage; i < page countOnPage;
+			 * i++) { dispayedGoods.add(goods.get(i)); } } catch
 			 * (IndexOutOfBoundsException e) { }
 			 */
 			model.addAttribute("goods", goods);

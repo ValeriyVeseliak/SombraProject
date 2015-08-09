@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 @NamedQueries({
@@ -39,9 +38,6 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
 
-	@OneToOne(cascade = CascadeType.ALL, targetEntity = Basket.class, mappedBy = "user")
-	private Basket basket = new Basket();
-
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
 	private Set<Custom> customs;
 
@@ -65,7 +61,7 @@ public class User {
 	}
 
 	public User(Long id, String firstName, String lastName, String email,
-			String login, String password, String phoneNumber, UserRole role, Boolean isEnabled, Basket basket,
+			String login, String password, String phoneNumber, UserRole role, Boolean isEnabled,
 			Set<Custom> customs) {
 		this.id = id;
 		this.firstName = firstName;
@@ -75,7 +71,6 @@ public class User {
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 		this.role = role;
-		this.basket = basket;
 		this.customs = customs;
 		this.isEnabled = isEnabled;
 	}
@@ -136,14 +131,6 @@ public class User {
 		this.password = password;
 	}
 
-	public Basket getBasket() {
-		return basket;
-	}
-
-	public void setBasket(Basket basket) {
-		this.basket = basket;
-	}
-
 	public Set<Custom> getCustoms() {
 		return customs;
 	}
@@ -177,11 +164,6 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (basket == null) {
-			if (other.basket != null)
-				return false;
-		} else if (!basket.equals(other.basket))
-			return false;
 		if (customs == null) {
 			if (other.customs != null)
 				return false;

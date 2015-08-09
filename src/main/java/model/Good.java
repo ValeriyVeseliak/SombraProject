@@ -1,11 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,12 +16,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+import org.springframework.context.annotation.Scope;
+
+@SuppressWarnings("serial")
 @Entity
 @NamedQueries({
 		@NamedQuery(name = Good.GET_GOOD_BY_CATHEGORY, query = "Select g from Good as g Where g.cathegory=:cathegory"),
 		@NamedQuery(name = Good.GET_GOOD_BY_PRICE, query = "Select g from Good as g Where g.price=:price"),
 		@NamedQuery(name = Good.GET_GOOD_BY_CATHEGORY_AND_PRICE, query = "Select g from Good as g Where g.cathegory=:cathegory And g.price<=:price"), })
-public class Good {
+@Scope("session")
+public class Good implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -35,10 +39,6 @@ public class Good {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "cathegoryId")
 	private Cathegory cathegory;
-
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinTable(name = "BasketGood", joinColumns = { @JoinColumn(name = "goodId", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "basketId", nullable = false) })
-	private List<Basket> basket;
 
 	@ManyToMany(cascade = CascadeType.REMOVE)
 	@JoinTable(name = "CustomGood", joinColumns = { @JoinColumn(name = "goodId", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "customId", nullable = false) })
@@ -99,14 +99,6 @@ public class Good {
 
 	public void setCathegory(Cathegory cathegory) {
 		this.cathegory = cathegory;
-	}
-
-	public List<Basket> getBasket() {
-		return basket;
-	}
-
-	public void setBasket(List<Basket> basket) {
-		this.basket = basket;
 	}
 
 	public List<Custom> getCustoms() {

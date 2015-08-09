@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import model.Basket;
 import model.Custom;
 import model.Good;
 import model.User;
@@ -19,19 +20,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import dto.CathegoryDTO;
-import service.BasketService;
 import service.CathegoryService;
 import service.CustomService;
 import service.GoodService;
 import service.UserService;
+import dto.CathegoryDTO;
 
 @Controller
 @RequestMapping(value = "/basket")
 public class BasketController {
-
-	@Inject
-	BasketService basketService;
 	@Inject
 	GoodService goodService;
 	@Inject
@@ -41,67 +38,58 @@ public class BasketController {
 	@Inject
 	CathegoryService cathegoryService;
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping()
-	public String getAllGoodInBasket(Model model, Principal principal) {
-		try {
-			User user = userService.getUserByLogin(principal.getName());
-			Basket basket = user.getBasket();
-			List<CathegoryDTO> cathegories = cathegoryService.getAll();
-			Double sumPrice = (double) 0;
-			Set<Good> goods = basket.getGoods();
-			for (Good good : goods) {
+	public String getAllGoodInBasket(Model model, HttpServletRequest request, HttpSession session) {
+		List<CathegoryDTO> cathegories = cathegoryService.getAll();
+		model.addAttribute("cathegories", cathegories);
+		Set<Good> cart = (Set<Good>) session.getAttribute("goodsList");
+		boolean isEmpty = true;
+		double sumPrice = 0;
+		if (cart != null) {
+			model.addAttribute("goods", cart);
+			if (!cart.isEmpty()) {
+				isEmpty = false;
+			}
+			for (Good good : cart) {
 				sumPrice += good.getPrice();
 			}
-			boolean countOfGoods = goods.isEmpty();
-			model.addAttribute("countOfGoods", countOfGoods);
-			model.addAttribute("sumPrice", sumPrice);
-			model.addAttribute("goods", goods);
-			model.addAttribute("cathegories", cathegories);
-		} catch (NullPointerException e) {
-			boolean countOfGoods = true;
-			model.addAttribute("countOfGoods", countOfGoods);
-			return "basket";
 		}
+		model.addAttribute("isEmpty", isEmpty);
+		model.addAttribute("sumPrice", sumPrice);
 		return "basket";
 	}
 
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
+	@SuppressWarnings("unchecked")
 	public String deleteGoodFromBasket(@PathVariable long id,
-			Principal principal) {
+			Principal principal, HttpSession session) {
 		Good good = goodService.getByID(id);
-		User user = userService.getUserByLogin(principal.getName());
-		Basket basket = user.getBasket();
-		Set<Good> goods = basket.getGoods();
+		Set<Good> goods = (Set<Good>) session.getAttribute(
+				"goodsList");
 		Iterator<Good> g = goods.iterator();
 		while (g.hasNext()) {
 			if (g.next().equals(good)) {
 				g.remove();
 			}
 		}
-		basket.setGoods(goods);
-		basketService.update(basket);
 		return "redirect:/basket";
 	}
 
 	@RequestMapping(value = "/makeOrder", method = RequestMethod.GET)
-	public String makeAnOrder(Principal principal, Model model) {
+	@SuppressWarnings("unchecked")
+	public String makeAnOrder(Principal principal, Model model,
+			HttpSession session) {
 		User user = userService.getUserByLogin(principal.getName());
-		Basket basket = user.getBasket();
 		List<CathegoryDTO> cathegories = cathegoryService.getAll();
-		Set<Good> goods = basket.getGoods();
+		Set<Good> goods = (Set<Good>) session.getAttribute("goodsList");
 		double priceOfOrder = 0;
 		for (Good good : goods) {
 			priceOfOrder += good.getPrice();
 		}
-		Custom custom = new Custom();
-		custom.setUser(user);
-		custom.setTimeOfCustom(new Date());
-		custom.setGoods(goods);
-		custom.setPriceOfOrder(priceOfOrder);
+		Custom custom = new Custom(user, goods, new Date(), priceOfOrder);
 		customService.add(custom);
-		goods.clear();
-		basket.setGoods(goods);
-		basketService.update(basket);
+		session.invalidate();
 		model.addAttribute("cathegories", cathegories);
 		return "success";
 	}

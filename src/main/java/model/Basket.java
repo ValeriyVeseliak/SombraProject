@@ -1,4 +1,4 @@
-package model;
+/*package model;
 
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -14,8 +14,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
-@Entity
-@NamedQueries({ @NamedQuery(name = Basket.GET_BASKET_BY_USER, query = "Select b from Basket as b where b.user=:user") })
+
 public class Basket {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -127,3 +126,4 @@ public class Basket {
 	}
 
 }
+*/

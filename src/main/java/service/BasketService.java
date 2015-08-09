@@ -1,4 +1,4 @@
-package service;
+/*package service;
 
 import java.util.List;
 
@@ -19,3 +19,4 @@ public interface BasketService {
 	
 	public Basket getBasketByUser(User user);
 }
+*/

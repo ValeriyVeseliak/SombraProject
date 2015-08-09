@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,9 +14,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+@SuppressWarnings("serial")
 @Entity
 @NamedQueries({ @NamedQuery(name = Cathegory.GET_CATHEGORY_BY_NAME, query = "Select c from Cathegory as c Where c.cathName=:cathName") })
-public class Cathegory {
+public class Cathegory implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
