@@ -7,7 +7,6 @@
 <head></head>
 <body>
 
-
 	<div class="search">
 		<form action="/SombraStore/search/">
 			<input type="text" name="keyword"> <select name="cathName">
@@ -29,26 +28,6 @@
 
 	<h1>${cathegory.cathName}</h1>
 
-	<%-- <c:forEach items="${goods}" var="good">
-		<div class="row">
-			<div class=".col-sm-5">
-				<div class="thumbnail">
-					<div class="img">
-						<a href="/SombraStore/good/${good.id}"><img
-							src="http://localhost:8080/SombraStore/resources/img/${good.id}.jpg"
-							class="previewimage"></a>
-					</div>
-					<div class="caption">
-						<a href="/SombraStore/good/${good.id}"><b>${good.goodName}</b></a>
-						<p>Price: ${good.price}</p>
-						<p>Details: ${good.description}</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</c:forEach> --%>
-
-	
 	<%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
 	<jsp:useBean id="pagedListHolder" scope="request"
 		type="org.springframework.beans.support.PagedListHolder" />
@@ -59,19 +38,16 @@
 	</c:url>
 	<%-- // show only current page worth of data --%>
 	<c:forEach items="${pagedListHolder.pageList}" var="good">
-		<div class="row">
-			<div class=".col-sm-5">
-				<div class="thumbnail">
-					<div class="img">
-						<a href="/SombraStore/good/${good.id}"> <img
-							src="resources/img/${good.id}.jpg" class="previewimage"></a>
-					</div>
-					<div class="caption">
-						<a href="/SombraStore/good/${good.id}"><b>${good.goodName}</b></a>
-						<p>Price: ${good.price}</p>
-						<p>Details: ${good.description}</p>
-					</div>
+		<div class="good-wrapper">
+			<div class="img">
+				<a href="/SombraStore/good/${good.id}"> <img
+					src="http://localhost:8080/SombraStore/resources/img/${good.id}.jpg" class="previewimage"></a>
+			</div>
+			<div class="caption">
+				<div class="good-name">
+					<a href="/SombraStore/good/${good.id}"><b>${good.goodName}</b></a>
 				</div>
+				<div class="price">Price: ${good.price}$</div>
 			</div>
 		</div>
 	</c:forEach>
@@ -80,34 +56,6 @@
 		<tg:paging pagedListHolder="${pagedListHolder}"
 			pagedLink="${pagedLink}" />
 	</div>
-	
-	
-	
-	
-	<%-- <c:if test="${maxPage != 1}">
-	<div class="text-center">
-		<ul class="pagination ">
-			<li><a href="/SombraStore/goods/${cathegory.cathName}/1">&laquo;&laquo;</a></li>
-			<c:if test="${page!=1}">
-				<li><a href="/SombraStore/goods/${cathegory.cathName}/${page-1}" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-				</a></li>
-				<li><a href="/SombraStore/goods/${cathegory.cathName}/${page-1}">${page-1}</a></li>
-			</c:if>
-			<li><a href="/SombraStore/goods/${cathegory.cathName}/${page}"
-				style="text-decoration: underline; background-color: rgba(0, 0, 0, 0.2);">${page}</a></li>
-			<c:if test="${page != maxPage}">
-				<li><a href="/SombraStore/goods/${cathegory.cathName}/${page+1}">${page+1}</a></li>
-				<li><a href="/SombraStore/goods/${cathegory.cathName}/${page+1}" aria-label="Next"> <span
-						aria-hidden="true">&raquo;</span>
-				</a></li>
-			</c:if>
-			<li><a href="/SombraStore/goods/${cathegory.cathName}/${maxPage}">&raquo;&raquo;</a></li>
-		</ul>
-	</div>
-	</c:if> --%>
-	
-	
-	
+
 </body>
 </html>

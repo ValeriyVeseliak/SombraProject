@@ -30,8 +30,8 @@
 
 	<h1>Basket</h1>
 
-	<h1>Your order has already made.</h1>
-	<h1>Thanks for buying.</h1>
+	<h3 style="text-align:center;">Your order is issued.</h3>
+	<h3 style="text-align:center;">Thanks for buying.</h3>
 
 </body>
 

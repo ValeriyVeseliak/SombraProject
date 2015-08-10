@@ -32,25 +32,28 @@
 	<c:forEach items="${goods}" var="good">
 		<div class="row">
 			<div class=".col-sm-6">
-				<div class="thumbnail">
-					<img src="http://localhost:8080/SombraStore/resources/img/${good.id}.jpg" class="previewimage">
-					<div class="caption">
-						<h3>${good.goodName}</h3>
-						<p>Price: ${good.price}</p>
-						<p>Details: ${good.description}</p>
-						<a href="/SombraStore/basket/${good.id}/delete">Delete</a>
-					</div>
+				<div class="basket-img">
+					<img
+						src="http://localhost:8080/SombraStore/resources/img/${good.id}.jpg"
+						class="previewimage">
+				</div>
+				<div class="basket-caption">
+					<h3>${good.goodName}</h3>
+					<p>Price: ${good.price}</p>
+					<p>Details: ${good.description}</p>
+					<a href="/SombraStore/basket/${good.id}/delete"
+						style="font-weight: bold;">Delete</a>
 				</div>
 			</div>
 		</div>
 	</c:forEach>
-
-	<c:if test="${!isEmpty}">
-		<p>Price of all goods is ${sumPrice}</p>
-		<a href="/SombraStore/basket/makeOrder" class="btn btn-primary"
-			role="button">Make an Order</a>
-	</c:if>
-
+	<div class="order">
+		<c:if test="${!isEmpty}">
+			<p>Price of all goods is ${sumPrice}</p>
+			<a href="/SombraStore/basket/makeOrder" class="btn btn-primary"
+				role="button">Make an Order</a>
+		</c:if>
+	</div>
 </body>
 </html>
 

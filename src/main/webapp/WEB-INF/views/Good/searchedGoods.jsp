@@ -48,19 +48,16 @@
 	</c:url>
 	<%-- // show only current page worth of data --%>
 	<c:forEach items="${pagedListHolder.pageList}" var="good">
-		<div class="row">
-			<div class=".col-sm-5">
-				<div class="thumbnail">
-					<div class="img">
-						<a href="/SombraStore/good/${good.id}"> <img
-							src="resources/img/${good.id}.jpg" class="previewimage"></a>
-					</div>
-					<div class="caption">
-						<a href="/SombraStore/good/${good.id}"><b>${good.goodName}</b></a>
-						<p>Price: ${good.price}</p>
-						<p>Details: ${good.description}</p>
-					</div>
+		<div class="good-wrapper">
+			<div class="img">
+				<a href="/SombraStore/good/${good.id}"> <img
+					src="resources/img/${good.id}.jpg" class="previewimage"></a>
+			</div>
+			<div class="caption">
+				<div class="good-name">
+					<a href="/SombraStore/good/${good.id}"><b>${good.goodName}</b></a>
 				</div>
+				<div class="price">Price: ${good.price}$</div>
 			</div>
 		</div>
 	</c:forEach>

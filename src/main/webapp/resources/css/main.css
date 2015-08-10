@@ -69,14 +69,14 @@ h1{
 }
 
 .img{
-	height:100%;
-	width:20%;
+	height:250px;
+	width:300px;
+	margin:0 auto;
 }
 
 .previewimage{
-	height:120px;
-	width:120px;
-	float:left;
+	height:100%;
+	width:100%;
 }
 .signup-form{
 	width:40%;
@@ -84,8 +84,8 @@ h1{
 	margin: 0 auto;
 }
 img.full-size{
-	height:250px;
-	width:250px;
+	height:400px;
+	width:400px;
 	float:left;
 }
 .temp-page{
@@ -97,3 +97,67 @@ img.full-size{
 	height:30px;
 }
 
+.good-wrapper{
+	width:50%;
+	heighr:200px;
+	float:left;
+	padding-right:50px;
+	padding-bottom:20px;
+	margin: auto;
+}
+.good-name{
+	height:100%;
+	width:100%;
+	text-align:left;
+	color:black;
+	font-weight: bold;
+	font-family: Arial;
+	float:left;
+	font-size:25px;
+	margin: 0 auto;
+	text-align: center;
+}
+.price{
+	height:100%;
+	width:100%;
+	text-align:right;
+	color: green;
+	font-family: Arial;
+	font-weight: bold;
+	font-size:20px;
+	text-align: center;
+}
+.img-place{
+	width:410px;
+	height:100%;
+	float:left;
+	margin-right:50px;
+}
+.basket-img{
+	width:30%;
+	height:100%;
+	float: left;
+	margin-right:40px;
+}
+.basket-img img{
+	height: 200px;
+	width:200px;
+}
+.basket-caption{
+	width:50%;
+	height: 100%;
+	float: left;
+}
+.delete{
+	float:right;
+	width: auto;
+	heigt: 100%;
+}
+.row{
+	margin-bottom: 30px;
+}
+.order{
+	height: 30px;
+	width:20%;
+	margin: 0 auto;
+}

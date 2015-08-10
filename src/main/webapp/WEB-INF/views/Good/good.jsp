@@ -27,43 +27,42 @@
 	</div>
 
 	<h2 style="text-align: center">${good.goodName}</h2>
-	<div class="row">
-		<div class=".col-md-5">
-			<div class="thumbnail">
-				<img
-					src="http://localhost:8080/SombraStore/resources/img/${good.id}.jpg"
-					class="full-size">
-				<div class="caption">
-					<b>${good.goodName}</b>
-					<p>Price: ${good.price}</p>
-					<p>Details: ${good.description}</p>
-					<c:if test="${good.isAvailable == true}">
-						<p style="color: green">AVAILABLE</p>
-
-						<sec:authorize access="hasRole('ROLE_USER')">
-							<c:if test="${ordered == false}">
-								<a href="/SombraStore/toBasket/${good.id}"
-									class="btn btn-primary" role="button">Add to Basket</a>
-							</c:if>
-							<c:if test="${ordered == true}">
-								<a href="/SombraStore/basket/${good.id}/delete"
-									class="btn btn-primary" role="button">Delete from cart</a>
-							</c:if>
-						</sec:authorize>
-
-					</c:if>
-					<c:if test="${good.isAvailable == false}">
-						<p style="color: red">NOT AVAILABLE</p>
-						<sec:authorize access="hasRole('ROLE_USER')">
-							<a href="/SombraStore/toBasket/${good.id}"></a>
-							<input type="button" class="btn btn-primary" role="button"
-								value="Add to Basket" disabled="disabled">
-						</sec:authorize>
-					</c:if>
-
-				</div>
-			</div>
+	<div class="good">
+		<div class="img-place">
+			<img
+				src="http://localhost:8080/SombraStore/resources/img/${good.id}.jpg"
+				class="full-size">
 		</div>
+		<div class="caption">
+			<p>Price: ${good.price}</p>
+			<p>Details: ${good.description}</p>
+			<c:if test="${good.isAvailable == true}">
+				<p style="color: green">AVAILABLE</p>
+
+				<sec:authorize access="hasRole('ROLE_USER')">
+					<c:if test="${ordered == false}">
+						<a href="/SombraStore/toBasket/${good.id}" class="btn btn-primary"
+							role="button">Add to Basket</a>
+					</c:if>
+					<c:if test="${ordered == true}">
+						<a href="/SombraStore/basket/${good.id}/delete"
+							class="btn btn-primary" role="button">Delete from cart</a>
+					</c:if>
+				</sec:authorize>
+
+			</c:if>
+			<c:if test="${good.isAvailable == false}">
+				<p style="color: red">NOT AVAILABLE</p>
+				<sec:authorize access="hasRole('ROLE_USER')">
+					<a href="/SombraStore/toBasket/${good.id}"></a>
+					<input type="button" class="btn btn-primary" role="button"
+						value="Add to Basket" disabled="disabled">
+				</sec:authorize>
+			</c:if>
+
+		</div>
+	</div>
+	</div>
 	</div>
 
 </body>
