@@ -22,14 +22,14 @@
 	<div class="categories">
 		<c:forEach items="${cathegories}" var="cathegory">
 			<div class="catlinks">
-				<a href="/SombraStore/goods/${cathegory.cathName}/1">${cathegory.cathName}</a>
+				<a href="/SombraStore/goods/${cathegory.cathName}/">${cathegory.cathName}</a>
 			</div>
 		</c:forEach>
 	</div>
 
 	<h1>${cathegory.cathName}</h1>
 
-	<c:forEach items="${goods}" var="good">
+	<%-- <c:forEach items="${goods}" var="good">
 		<div class="row">
 			<div class=".col-sm-5">
 				<div class="thumbnail">
@@ -46,11 +46,45 @@
 				</div>
 			</div>
 		</div>
-	</c:forEach>
+	</c:forEach> --%>
 
 	
+	<%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
+	<jsp:useBean id="pagedListHolder" scope="request"
+		type="org.springframework.beans.support.PagedListHolder" />
+	<%-- // create link for pages, "~" will be replaced 
+   later on with the proper page number --%>
+	<c:url value="/goods/${cathegory.cathName}/" var="pagedLink">
+		<c:param name="page" value="~" />
+	</c:url>
+	<%-- // show only current page worth of data --%>
+	<c:forEach items="${pagedListHolder.pageList}" var="good">
+		<div class="row">
+			<div class=".col-sm-5">
+				<div class="thumbnail">
+					<div class="img">
+						<a href="/SombraStore/good/${good.id}"> <img
+							src="resources/img/${good.id}.jpg" class="previewimage"></a>
+					</div>
+					<div class="caption">
+						<a href="/SombraStore/good/${good.id}"><b>${good.goodName}</b></a>
+						<p>Price: ${good.price}</p>
+						<p>Details: ${good.description}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</c:forEach>
+
+	<div style="width: 100px; margin: 0 auto; align: center;">
+		<tg:paging pagedListHolder="${pagedListHolder}"
+			pagedLink="${pagedLink}" />
+	</div>
 	
-	<c:if test="${maxPage != 1}">
+	
+	
+	
+	<%-- <c:if test="${maxPage != 1}">
 	<div class="text-center">
 		<ul class="pagination ">
 			<li><a href="/SombraStore/goods/${cathegory.cathName}/1">&laquo;&laquo;</a></li>
@@ -71,14 +105,9 @@
 			<li><a href="/SombraStore/goods/${cathegory.cathName}/${maxPage}">&raquo;&raquo;</a></li>
 		</ul>
 	</div>
-	</c:if>
+	</c:if> --%>
 	
 	
 	
-	<script type="text/javascript"
-		src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
-	
-
 </body>
 </html>

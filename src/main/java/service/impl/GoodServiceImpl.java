@@ -24,7 +24,7 @@ public class GoodServiceImpl implements GoodService {
 
 	@Inject
 	CathegoryDao cathegoryDao;
-
+	
 	@Transactional
 	public List<GoodDTO> getAll() {
 		List<GoodDTO> dtos = new ArrayList<>();
@@ -102,5 +102,7 @@ public class GoodServiceImpl implements GoodService {
 		}
 		return dtos;
 	}
+
+	
 
 }

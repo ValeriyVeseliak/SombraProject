@@ -13,7 +13,7 @@ public interface GoodService {
 	public Good update(Good good);
 
 	public Good getByID(Long id);
-
+	
 	public List<GoodDTO> getAll();
 
 	public void delete(Good good);

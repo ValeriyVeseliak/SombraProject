@@ -116,7 +116,7 @@ public class Good implements Serializable{
 	public void setIsAvailable(Boolean isAvailable) {
 		this.isAvailable = isAvailable;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -158,7 +158,5 @@ public class Good implements Serializable{
 			return false;
 		return true;
 	}
-
-
-
+	
 }

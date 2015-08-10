@@ -21,7 +21,7 @@
 	<div class="categories">
 		<c:forEach items="${cathegories}" var="cathegory">
 			<div class="catlinks">
-				<a href="/SombraStore/goods/${cathegory.cathName}/1">${cathegory.cathName}</a>
+				<a href="/SombraStore/goods/${cathegory.cathName}/">${cathegory.cathName}</a>
 			</div>
 		</c:forEach>
 	</div>
@@ -30,23 +30,34 @@
 	<div class="row">
 		<div class=".col-md-5">
 			<div class="thumbnail">
-				<img src="http://localhost:8080/SombraStore/resources/img/${good.id}.jpg" class="full-size">
+				<img
+					src="http://localhost:8080/SombraStore/resources/img/${good.id}.jpg"
+					class="full-size">
 				<div class="caption">
 					<b>${good.goodName}</b>
 					<p>Price: ${good.price}</p>
 					<p>Details: ${good.description}</p>
 					<c:if test="${good.isAvailable == true}">
-						<p style="color:green">AVAILABLE</p>
+						<p style="color: green">AVAILABLE</p>
+
 						<sec:authorize access="hasRole('ROLE_USER')">
-							<a href="/SombraStore/toBasket/${good.id}"
-								class="btn btn-primary" role="button">Add to Basket</a>
+							<c:if test="${ordered == false}">
+								<a href="/SombraStore/toBasket/${good.id}"
+									class="btn btn-primary" role="button">Add to Basket</a>
+							</c:if>
+							<c:if test="${ordered == true}">
+								<a href="/SombraStore/basket/${good.id}/delete"
+									class="btn btn-primary" role="button">Delete from cart</a>
+							</c:if>
 						</sec:authorize>
+
 					</c:if>
 					<c:if test="${good.isAvailable == false}">
-						<p style="color:red">NOT AVAILABLE</p>
+						<p style="color: red">NOT AVAILABLE</p>
 						<sec:authorize access="hasRole('ROLE_USER')">
 							<a href="/SombraStore/toBasket/${good.id}"></a>
-								<input type="button" class="btn btn-primary" role="button" value="Add to Basket" disabled="disabled">
+							<input type="button" class="btn btn-primary" role="button"
+								value="Add to Basket" disabled="disabled">
 						</sec:authorize>
 					</c:if>
 

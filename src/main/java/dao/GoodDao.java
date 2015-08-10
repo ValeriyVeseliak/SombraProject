@@ -6,6 +6,8 @@ import model.Cathegory;
 import model.Good;
 
 public interface GoodDao extends BaseDao<Good> {
+	
+	public List<Good> getAll(int page);
 
 	public List<Good> getGoodByCathegory(Cathegory cathegory);
 

@@ -6,9 +6,11 @@
 <tiles-definitions>
 
 	<definition name="base.definition" template="/WEB-INF/views/tiles/layout.jsp">
-		<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
 		<put-attribute name="main_content" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
 	</definition>
+
 
 	<definition name="login" extends="base.definition">
 		<put-attribute name="title" value="Login" />
@@ -24,13 +26,14 @@
 		<put-attribute name="title" value="Admin Cabinet" />
 		<put-attribute name="main_content" value="/WEB-INF/views/Admin/admin.jsp" />
 	</definition>
-	
+
 	<definition name="cathegories" extends="base.definition">
 		<put-attribute name="title" value="Cathegories" />
-		<put-attribute name="main_content" value="/WEB-INF/views/Admin/cathegories.jsp" />
+		<put-attribute name="main_content"
+			value="/WEB-INF/views/Admin/cathegories.jsp" />
 	</definition>
-	
-	
+
+
 	<definition name="orders" extends="base.definition">
 		<put-attribute name="title" value="Orders" />
 		<put-attribute name="main_content" value="/WEB-INF/views/Admin/orders.jsp" />
@@ -67,17 +70,15 @@
 		<put-attribute name="main_content"
 			value="/WEB-INF/views/Good/searchedGoods.jsp" />
 	</definition>
-	
+
 	<definition name="basket" extends="base.definition">
 		<put-attribute name="title" value="Basket" />
-		<put-attribute name="main_content"
-			value="/WEB-INF/views/Good/basket.jsp" />
+		<put-attribute name="main_content" value="/WEB-INF/views/Good/basket.jsp" />
 	</definition>
-	
+
 	<definition name="no_access" extends="base.definition">
 		<put-attribute name="title" value="Error" />
-		<put-attribute name="main_content"
-			value="/WEB-INF/views/Main/no_access.jsp" />
+		<put-attribute name="main_content" value="/WEB-INF/views/Main/no_access.jsp" />
 	</definition>
 
 </tiles-definitions>

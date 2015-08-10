@@ -22,7 +22,7 @@
 	<div class="categories">
 		<c:forEach items="${cathegories}" var="cathegory">
 			<div class="catlinks">
-				<a href="/SombraStore/goods/${cathegory.cathName}/1">${cathegory.cathName}</a>
+				<a href="/SombraStore/goods/${cathegory.cathName}/">${cathegory.cathName}</a>
 			</div>
 		</c:forEach>
 	</div>

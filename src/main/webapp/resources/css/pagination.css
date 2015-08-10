@@ -1,0 +1,23 @@
+.pagingItem {
+font-weight: normal;
+font-size: 14pt;
+text-decoration: none;
+color: #747474;
+margin: 0 2px;
+padding: 0 2px;
+background-color: #eeeeee;
+border: 1px solid #bababa;
+font-size: 1.2em;
+line-height: 1.5em;
+align:center;
+}
+.pagingItemCurrent{
+padding: 0 2px;
+margin: 0 2px;
+font-weight: normal;
+color: #FFFFFF;
+background-color: #bfbfbf;
+border: 1px solid #bfbfbf;
+font-size: 1.6em;
+align:center;
+}

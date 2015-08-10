@@ -21,6 +21,19 @@ public class GoodDaoImpl extends BaseDaoImpl<Good> implements GoodDao {
 
 	@SuppressWarnings("unchecked")
 	@Transactional
+	public List<Good> getAll(int page) {
+		int goodsOnPage = 10;
+		try {
+			return entityManager.createQuery("from Good")
+					.setFirstResult(page * goodsOnPage - goodsOnPage)
+					.setMaxResults(page * goodsOnPage).getResultList();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<Good> getGoodByCathegory(Cathegory cathegory) {
 		try {
 			return (List<Good>) entityManager
@@ -63,8 +76,7 @@ public class GoodDaoImpl extends BaseDaoImpl<Good> implements GoodDao {
 			return (List<Good>) entityManager
 					.createQuery(
 							"Select g from Good as g Where g.goodName Like :keyword")
-					.setParameter("keyword", '%' + keyword + '%')
-					.getResultList();
+					.setParameter("keyword", '%' + keyword + '%').getResultList();
 		} catch (NoResultException e) {
 			return null;
 		}
